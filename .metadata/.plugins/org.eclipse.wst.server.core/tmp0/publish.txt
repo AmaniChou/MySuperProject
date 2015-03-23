@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Mon Mar 23 16:10:04 CET 2015
+org.eclipse.jst.j2ee.server\:lcm-db=WEB-INF/lib/lcm-db-0.0.1-SNAPSHOT.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Amani\\.m2\\repository\\org\\springframework\\spring-web\\4.1.5.RELEASE\\spring-web-4.1.5.RELEASE.jar=WEB-INF/lib/spring-web-4.1.5.RELEASE.jar
+org.eclipse.jst.j2ee.server\:lcm-core=WEB-INF/lib/lcm-core-0.0.1-SNAPSHOT.jar

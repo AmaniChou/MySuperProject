@@ -1,0 +1,5 @@
+package com.oreedoo.lcm.core.service;
+
+public interface ServiceManager {
+
+}

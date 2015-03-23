@@ -1,0 +1,244 @@
+!SESSION 2015-03-23 09:14:46.715 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_75
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+This is a continuation of log file D:\PFE\.metadata\.bak_0.log
+Created Time: 2015-03-23 16:00:45.638
+
+!ENTRY org.eclipse.core.resources 4 2 2015-03-23 16:00:45.639
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.wst.common.componentcore.internal.util.VirtualReferenceUtilities.getDefaultProjectArchiveName(VirtualReferenceUtilities.java:81)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getJavaClasspathReferences(J2EEModuleVirtualComponent.java:338)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getNonManifestRefs(J2EEModuleVirtualComponent.java:242)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:166)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:214)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:207)
+	at org.eclipse.m2e.wtp.overlay.internal.servers.OverlayResourceChangeListener.hasOverlayChanged(OverlayResourceChangeListener.java:149)
+	at org.eclipse.m2e.wtp.overlay.internal.servers.OverlayResourceChangeListener.resourceChanged(OverlayResourceChangeListener.java:78)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:291)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:285)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:149)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:396)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1531)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:156)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.jobs 4 2 2015-03-23 16:00:46.087
+!MESSAGE An internal error occurred during: "Updating status for Tomcat v6.0 Server at localhost...".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.wst.common.componentcore.internal.util.VirtualReferenceUtilities.getDefaultProjectArchiveName(VirtualReferenceUtilities.java:81)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getJavaClasspathReferences(J2EEModuleVirtualComponent.java:338)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getNonManifestRefs(J2EEModuleVirtualComponent.java:242)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:166)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:214)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:207)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.hasConsumableReferences(SingleRootUtil.java:217)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.validateSingleRoot(SingleRootUtil.java:165)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.isSingleRoot(SingleRootUtil.java:93)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootExportParticipant.canOptimize(SingleRootExportParticipant.java:88)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.canOptimize(FlatVirtualComponent.java:203)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.cacheResources(FlatVirtualComponent.java:185)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.fetchResources(FlatVirtualComponent.java:118)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.members(FlatComponentDeployable.java:227)
+	at org.eclipse.jst.j2ee.internal.deployables.J2EEFlexProjDeployable.members(J2EEFlexProjDeployable.java:267)
+	at org.eclipse.wst.server.core.internal.ModulePublishInfo.hasDelta(ModulePublishInfo.java:435)
+	at org.eclipse.wst.server.core.internal.ServerPublishInfo.hasDelta(ServerPublishInfo.java:440)
+	at org.eclipse.wst.server.core.internal.Server.hasPublishedResourceDelta(Server.java:1587)
+	at org.eclipse.wst.server.core.internal.Server$ResourceChangeJob$1.visit(Server.java:217)
+	at org.eclipse.wst.server.core.internal.Server.visitModule(Server.java:3037)
+	at org.eclipse.wst.server.core.internal.Server.visit(Server.java:3021)
+	at org.eclipse.wst.server.core.internal.Server$ResourceChangeJob.run(Server.java:228)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.jobs 4 2 2015-03-23 16:00:46.094
+!MESSAGE An internal error occurred during: "Updating status for Tomcat v7.0 Server at localhost...".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.wst.common.componentcore.internal.util.VirtualReferenceUtilities.getDefaultProjectArchiveName(VirtualReferenceUtilities.java:81)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getJavaClasspathReferences(J2EEModuleVirtualComponent.java:338)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getNonManifestRefs(J2EEModuleVirtualComponent.java:242)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:166)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:214)
+	at org.eclipse.jst.j2ee.componentcore.J2EEModuleVirtualComponent.getReferences(J2EEModuleVirtualComponent.java:207)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.hasConsumableReferences(SingleRootUtil.java:217)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.validateSingleRoot(SingleRootUtil.java:165)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootUtil.isSingleRoot(SingleRootUtil.java:93)
+	at org.eclipse.jst.common.internal.modulecore.SingleRootExportParticipant.canOptimize(SingleRootExportParticipant.java:88)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.canOptimize(FlatVirtualComponent.java:203)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.cacheResources(FlatVirtualComponent.java:185)
+	at org.eclipse.wst.common.componentcore.internal.flat.FlatVirtualComponent.fetchResources(FlatVirtualComponent.java:118)
+	at org.eclipse.wst.web.internal.deployables.FlatComponentDeployable.members(FlatComponentDeployable.java:227)
+	at org.eclipse.jst.j2ee.internal.deployables.J2EEFlexProjDeployable.members(J2EEFlexProjDeployable.java:267)
+	at org.eclipse.wst.server.core.internal.ModulePublishInfo.hasDelta(ModulePublishInfo.java:435)
+	at org.eclipse.wst.server.core.internal.ServerPublishInfo.hasDelta(ServerPublishInfo.java:440)
+	at org.eclipse.wst.server.core.internal.Server.hasPublishedResourceDelta(Server.java:1587)
+	at org.eclipse.wst.server.core.internal.Server$ResourceChangeJob$1.visit(Server.java:217)
+	at org.eclipse.wst.server.core.internal.Server.visitModule(Server.java:3037)
+	at org.eclipse.wst.server.core.internal.Server.visit(Server.java:3021)
+	at org.eclipse.wst.server.core.internal.Server$ResourceChangeJob.run(Server.java:228)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:01:14.181
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:04:09.419
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:09.420
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.008
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.009
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:11.009
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:14.160
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:04:27.446
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:05:41.349
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Publishing failed with multiple errors
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/primefaces-4.0.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/all-themes-1.0.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jstl-1.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-api-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/jsf-impl-2.2.10.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/el-impl-2.2.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-tomcat-support-1.0.1-Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib/weld-servlet-1.1.15.Final.jar. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 0 2015-03-23 16:09:14.961
+!MESSAGE Could not delete D:/PFE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/lcm-reporting/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2015-03-23 16:45:36.362
+!MESSAGE Launch configuration App references non-existing project DBconnect.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2015-03-23 16:45:36.363
+!MESSAGE Launch configuration App references non-existing project DBconnect.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2015-03-23 16:45:36.367
+!MESSAGE Launch configuration App references non-existing project DBconnect.

@@ -1,0 +1,289 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	font-family: verdana, georgia, arial;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+	background: #FEFEFE;
+}
+
+table {
+	width: 100%;
+}
+
+.ui-panelgrid td {
+	border-color: none !important;
+}
+
+.ui-panel header {
+	background-color: black;
+	font-size: 18px;
+}
+
+.ui-panel {
+	font-size: 20px;
+}
+
+.copyright {
+	text-align: center;
+	font-size: 11px;
+	font-family: tahoma, arial;
+}
+
+.border {
+	position: relative;
+	border: 1px solid #bbb;
+	margin: 10px 0px;
+	padding: 5px 5px 0px 5px;
+	-moz-box-shadow: inset 0 1px 1px #eeeeee;
+	-ms-box-shadow: inset 0 1px 1px #eeeeee;
+	-o-box-shadow: inset 0 1px 1px #eeeeee;
+	-webkit-box-shadow: inset 0 1px 1px #EEE;
+	box-shadow: inset 0 1px 1px #EEE;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.home {
+	background: url('#{resource[' icons :     home.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.cog {
+	background: url('#{resource[' icons :     cog.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.exit {
+	background: url('#{resource[' icons :     exit.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.plus {
+	background: url('#{resource[' icons :     plus.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.table {
+	background: url('#{resource[' icons :     table.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.truck {
+	background: url('#{resource[' icons :     truck.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.users {
+	background: url('#{resource[' icons :     users.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.lock {
+	background: url('#{resource[' icons :     lock.png ']}') no-repeat
+		!important;
+	height: 16px;
+	width: 16px;
+}
+
+.logoOoredooHorizontal {
+	background: transparent
+		url("#{resource['images/horizontal_ooredoo_logo.png']}") no-repeat
+		center left;
+	width: 500px;
+	height: 120px;
+}
+
+.lCMAdmin {
+	background: transparent url("#{resource['images/Logo.png']}")
+		no-repeat center ;
+	width: 500px;
+	height: 130px;
+}
+
+.icon1 {
+	background: transparent url("#{resource['icons/home.png']}") no-repeat
+		center left;
+	padding: 5px 17px 9px;
+}
+
+.icon2 {
+	background: transparent url("#{resource['icons/exit.png']}") no-repeat
+		center left;
+	padding: 4px 17px 10px;
+}
+
+.wizardDialog.ui-dialog .ui-dialog-content {
+	padding: 0px !important;
+	margin: 0px !important;
+	overflow: hidden !important;
+	border-style: none !important;
+}
+
+.wizardPanel.ui-panel .ui-panel-content {
+	padding: 0px !important;
+	margin: 0px !important;
+	border-color: white !important;
+}
+
+.ui-panel {
+	background-color: #E92530:   
+		font-size:    20px;
+}
+
+.ui-outputlabel {
+	font-family: Opificio;
+	font-size: 18px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-datatable {
+	font-family: Opificio;
+	font-size: 22px;
+	color: #524A48;
+}
+
+.ui-column-filter {
+	font-family: Opificio;
+	font-size: 10px;
+	color: #524A48;
+}
+
+.ui-button-text {
+	font-family: Opificio;
+	font-size: 16px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-selectoneradio .ui-selectcheckboxmenu-label {
+	font-family: Opificio;
+	font-size: 22px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-fieldset-legend {
+	font-family: Opificio;
+	font-size: 22px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-state-active a,.ui-state-active a:link,.ui-state-active a:visited {
+	font-size: 15px !important;
+}
+
+.ui-selectonemenu-item {
+	font-family: Opificio;
+	font-size: 22px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-commandlink {
+	font-family: Opificio;
+	font-size: 16px;
+	font-weight: bold;
+	color: #524A48;
+}
+
+.ui-corner-all {
+	font-family: Opificio;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.ui-widget-header {
+	background: #EA212E;
+}
+
+.userInfo {
+	font-family: Opificio;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.msg {
+	width: 300px;
+	height: 100px;
+}
+
+.effect {
+	width: 300px;
+	height: 100px;
+	padding: 0.4em;
+	position: relative;
+	background: #F0F095
+}
+
+.effect h2 {
+	font-family: Opificio;
+	font-size: 17px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	background: red;
+}
+
+.effect h3 {
+	font-family: Opificio;
+	font-size: 16px;
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+}
+
+#beginMessage {
+	width: 300px;
+	height: 100px;
+	background: black;
+}
+
+.shadow{
+	-webkit-box-shadow : 0 0 10px 5px red !important; 
+}
+
+.buttonClass{
+background: url("../images/xml.png") no-repeat center !important;;
+
+
+}
+
+.StateEnd {
+	color: #AE2727;
+	border: 3px solid #D60C0C;
+    -webkit-box-shadow : 0 0 10px 5px red; 
+	-moz-border-radius: 1em;
+	border-radius: 8em;
+	opacity: 1;
+	filter: alpha(opacity =80);
+	width: 11em;
+	height: 6em;
+	line-height: 5em;
+	text-align: center;
+	z-index: 20;
+	position: absolute;
+	background-color: rgba(152, 248, 47, 0.28);
+	font-style: "color:red";
+	font-family: helvetica;
+	padding: 0.5em;
+	font-size: 0.8em;

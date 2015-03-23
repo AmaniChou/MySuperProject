@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="serviceForm2">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout service" toggleable="true" toggleSpeed="1000">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="SNCODE " />
+					<p:inputText value="#{serviceBean.sncode}" id="sncode"
+						required="true"
+						requiredMessage="Vous devez saisir un sncode positif !" />
+
+					<p:outputLabel value="Nom Service : " />
+					<p:inputText value="#{serviceBean.name}" id="nom" />
+
+					<p:outputLabel value="Preaction : " />
+					<p:inputText value="#{serviceBean.idPreAction }" id="preaction" />
+
+					<p:outputLabel value="Priorite de prelevement : " />
+					<p:inputText value="#{serviceBean.prelevementPriority}"
+						id="priorite" />
+
+
+					<p:outputLabel value="Birthday Flag: " />
+					<p:selectOneRadio id="flag" value="#{serviceBean.birthdayFlag}">
+						<f:selectItem itemLabel="true" itemValue="true" />
+						<f:selectItem itemLabel="false" itemValue="false" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Strategie de la date d'activation: " />
+					<p:selectOneMenu value="#{serviceBean.activationDateStrategy}">
+						<f:selectItem itemLabel="DATE_TO_DATE" itemValue="DATE_TO_DATE" />
+						<f:selectItem itemLabel="MONTH_TRUNCATE"
+							itemValue="MONTH_TRUNCATE" />
+						<f:selectItem itemLabel="DAY_TRUNCATE" itemValue="DAY_TRUNCATE" />
+						<f:selectItem itemLabel="HOUR_TRUNCATE" itemValue="HOUR_TRUNCATE" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="modifier" update="serviceForm2"
+						actionListener="#{serviceBean.addServAction}" />
+				</p:panelGrid>
+			</p:panel>
+
+			<br></br>
+
+			<p:graphicImage width="30%" height="30%"
+				value="/images2/CycleDeVie.png" />
+			<p:panel>
+				<p:panelGrid>
+
+					<p:commandButton value="MODIFIER LE CYCLE DE VIE"
+						update="serviceForm2" />
+
+				</p:panelGrid>
+			</p:panel>
+			<br></br>
+
+
+			<p:graphicImage width="30%" height="10%"
+				value="/images2/preactionService.png" />
+			<p:panel>
+				<p:panelGrid>
+					<p:outputLabel
+						value="Strategie de calcul de la date d'activation: "  style="font-weignt:bold;"/>
+					<p:selectOneMenu
+						value="#{serviceBean.newService.activationDateStrategy}">
+						<f:selectItem itemLabel="DATE_TO_DATE" itemValue="DATE_TO_DATE" />
+						<f:selectItem itemLabel="MONTH_TRUNCATE"
+							itemValue="MONTH_TRUNCATE" />
+						<f:selectItem itemLabel="DAY_TRUNCATE" itemValue="DAY_TRUNCATE" />
+						<f:selectItem itemLabel="HOUR_TRUNCATE" itemValue="HOUR_TRUNCATE" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<br></br>
+					<p:commandButton value="modifier"
+						update="serviceForm2" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

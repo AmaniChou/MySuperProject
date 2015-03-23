@@ -1,0 +1,21 @@
+package com.tunisiana.lcm.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class LcmLnkStateParameterEntityPK {
+	
+	
+	@Column(name="ID_STATE_PARAMETER")
+	String id_state_parameter;
+	
+
+	@Column(name="ID_STATE")
+	String id_state ;
+	
+
+	@Column(name="SNCODE")
+	long sncode;
+
+}

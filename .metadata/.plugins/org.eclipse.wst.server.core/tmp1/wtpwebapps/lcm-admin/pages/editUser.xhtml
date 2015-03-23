@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="userForm2">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Modification Utilisateur" toggleable="true"
+				toggleSpeed="1000" id="panelaction">
+
+				<p:commandButton value="Désactiver Utilisateur" update="userForm2"
+					style="float:right" actionListener="#{lcmUsersBean.desactivate}" />
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nom Utilisateur : " />
+					<p:inputText value="#{lcmUsersBean.selectedUser.username}"
+						id="username" disabled="true" />
+
+					<p:outputLabel value="Nom : " />
+					<p:inputText value="#{lcmUsersBean.selectedUser.firstname}"
+						id="name" disabled="true" />
+
+					<p:outputLabel value="Prénom : " />
+					<p:inputText value="#{lcmUsersBean.selectedUser.lastname}"
+						id="lastname" disabled="true" />
+
+
+					<p:outputLabel value="Profil Utilisateur: " />
+					<p:selectOneMenu
+						value="#{lcmUsersBean.selectedUser.lcmProfil.profil}"
+						effect="fade">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{lcmUsersBean.listProfilsName}"></f:selectItems>
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Date Expiration: " />
+					<p:calendar value="#{lcmUsersBean.selectedUser.expiration_date}"
+						id="date" />
+
+
+					<p:commandButton value="enregistrer" update="userForm2"
+						actionListener="#{lcmUsersBean.editUser}" />
+					<p:commandButton value="annuler" update="userForm2"
+						actionListener="#{lcmUsersBean.annuler2}" />
+
+				</p:panelGrid>
+			</p:panel>
+
+		</h:form>
+		 <h:form>
+			<p:panel id="PanelList">
+				<p:commandButton value="Liste des utilisateurs"
+					actionListener="#{lcmUsersBean.backListUser()}" />
+			</p:panel>
+</h:form>
+	</ui:define>
+
+</ui:composition>

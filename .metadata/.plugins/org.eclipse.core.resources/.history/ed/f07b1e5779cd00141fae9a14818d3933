@@ -1,0 +1,32 @@
+package com.tunsiana.lcm;
+
+import javax.persistence.EntityManagerFactory;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.tunisiana.lcm.DAOImp.EventDAOImp;
+import com.tunisiana.lcm.dao.LcmContextHistoryDAO;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    
+    {
+    	@SuppressWarnings("resource")
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/context/application-context.xml");
+//    	EventDAOImp eventDAO=(EventDAOImp) applicationContext.getBean("EventDAO");
+//      
+//
+//    	System.out.println(eventDAO.getEventByID("RECHARGE_DETECTOR").getEventName()+
+//    			" Version: "+eventDAO.getEventByID("RECHARGE_DETECTOR").getVersion()+
+//    			" ,Description : "+eventDAO.getEventByID("RECHARGE_DETECTOR").getDescription() );
+
+    	LcmContextHistoryDAO LCMContextHistoryDAO=(LcmContextHistoryDAOImp) applicationContext.getBean("LcmContextHistoryDAOImp");
+    	
+    }
+}

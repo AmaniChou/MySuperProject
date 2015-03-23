@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+
+			<h:outputStylesheet library="css" name="design.css" />
+
+
+			<p:panel header="Liste des Services" toggleable="true" rows="3"
+				toggleSpeed="1000" visible="#{lcmServicebean.boutonService}"
+				id="panelResult">
+				<p:dataTable var="serviceTAB"
+					value="#{lcmServicebean.servicesExportList}" paginator="true"
+					widgetVar="serviceTable" id="servicesTable"
+					rowKey="#{LifeCycleServieEntity.sncode}"
+					filteredValue="#{lcmServicebean.filtredService}"
+					rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="recherche :  " />
+							<p:inputText id="globalFilter" onkeyup="serviceTable.filter()"
+								style="width:150px" />
+						</p:outputPanel>
+					</f:facet>
+					<p:column headerText="SNCODE" filterBy="#{serviceTAB.sncode}"
+						filterMatchMode="contains">
+						<h:outputText value="#{serviceTAB.sncode}" />
+					</p:column>
+
+					<p:column headerText="Nom Service" filterBy="#{serviceTAB.name}"
+						filterMatchMode="contains">
+						<h:outputText value="#{serviceTAB.name}" />
+					</p:column>
+					<p:column headerText="Generate XML" style="width:20% ;height:1%">
+						<center>
+							<p:commandButton
+								action="#{lcmServicebean. generateXMLFile(serviceTAB)}"
+								ajax="false" icon="ui-icon-arrowthick-1-s">
+							</p:commandButton>
+						</center>
+					</p:column>
+				
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

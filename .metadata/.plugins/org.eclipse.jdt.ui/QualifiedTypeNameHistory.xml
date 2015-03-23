@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.persistence.Persistence"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ManagedBean"/>
+<fullyQualifiedTypeName name="javax.faces.bean.SessionScoped"/>
+<fullyQualifiedTypeName name="com.tunsiana.lcm.App"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.entities.LcmContextHistory"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.dao.LcmContextHistoryDAO"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.DAOImp.LcmContextHistoryDAOImp"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.dao.LcmServiceDAO"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.entities.LcmServiceEntity"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.DAOImp.LcmServiceDAOImp"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Table"/>
+<fullyQualifiedTypeName name="javax.persistence.Embeddable"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="javax.persistence.EmbeddedId"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.entities.LcmLnkStateParameterEntity"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.dao.LcmLnkStateParameterDAO"/>
+<fullyQualifiedTypeName name="javax.persistence.IdClass"/>
+<fullyQualifiedTypeName name="com.tunisiana.lcm.entities.LcmLnkStateParameterEntityPK"/>
+</qualifiedTypeNameHistroy>

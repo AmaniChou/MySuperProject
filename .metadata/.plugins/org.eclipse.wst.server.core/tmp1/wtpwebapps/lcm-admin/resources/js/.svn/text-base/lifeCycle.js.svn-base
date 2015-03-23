@@ -1,0 +1,1040 @@
+var clickedStateId = 0;
+var transitionSource = 0;
+var transitionTarget = 0;
+var clickedEndPoint = 0;
+var sourceName = "";
+var targetName = "";
+var stateMap = new Array();
+var connectionMap = new Array();
+var allEventList = [ "ACTIVATION", "DESACTIVATION", "DATE_ATTEINTE",
+		"RECHARGE_DETECTOR", "PRELEVEMENT" ];
+var currentSource = "";
+var currentSncode = null;
+var save = false;
+var currentStateId = 0;
+var d = -1;
+var transitionsToDelete = new Array();
+
+jsPlumb.importDefaults({
+	ConnectionsDetachable : false,
+	Endpoint : [ "Dot", {
+		radius : 3
+	} ],
+	EndpointStyles : [ {
+		fillStyle : '#222288'
+	}, {
+		fillStyle : '#222288'
+	} ],
+	HoverPaintStyle : {
+		strokeStyle : "#222288",
+		lineWidth : 3
+	},
+	ConnectionOverlays : [ [ "Arrow", {
+		location : 0.78
+	} ], [ "Label", {
+		label : "Nouvelle transition",
+		location : 0.4,
+		id : "label",
+		cssClass : "aLabel"
+	} ] ],
+	ConnectorZIndex : 5
+});
+// this is the paint style for the connecting lines..
+var connectorPaintStyle = {
+	lineWidth : 4,
+	strokeStyle : "#990000",
+	joinstyle : "round",
+	outlineColor : "#EAEDEF",
+	outlineWidth : 7
+};
+
+$(document).ready(function() {
+	$('#butid').click(function() {
+		saveLifeCycle();
+	});
+});
+function saveLifeCycle() {
+	var deletedTransitions = "";
+	if (d > -1) {
+		for ( var k = 0; k < transitionsToDelete.length; k++) {
+			deletedTransitions = deletedTransitions + transitionsToDelete[k]
+					+ "#";
+		}
+	}
+	if (document.implementation.createDocument
+			&& document.implementation.createDocumentType) {
+		var xmlDoc = document.implementation.createDocument(null,
+				"LifeCycleModel", null);
+		var sncodeAttribute = xmlDoc.getElementsByTagName("LifeCycleModel")[0];
+		sncodeAttribute.setAttribute("sncode", currentSncode);
+		sncodeAttribute.value = currentSncode.toString();
+		var stateNodes = xmlDoc.createElement("States");
+		xmlDoc.documentElement.appendChild(stateNodes);
+		for ( var j = 4; j < stateMap.length; j++) {
+			var stateNode = xmlDoc.createElement("State");
+			if (stateMap[j].name != null) {
+				stateNode.setAttribute("state_name", stateMap[j].name);
+				stateNode.setAttribute("state_id", j);
+				var statePeriod = xmlDoc.createElement("state_param");
+				statePeriod.setAttribute("parameter", "PERIOD");
+				statePeriod.setAttribute("value", stateMap[j].period);
+				stateNode.appendChild(statePeriod);
+				var stateRechargeDet = xmlDoc.createElement("state_param");
+				stateRechargeDet.setAttribute("parameter",
+						"IF_RECHARGE_DETECTOR");
+				stateRechargeDet.setAttribute("value",
+						stateMap[j].rechargeDetector);
+				stateNode.appendChild(stateRechargeDet);
+				var stateRealStatus = xmlDoc.createElement("state_param");
+				stateRealStatus
+						.setAttribute("parameter", "REAL_SERIVCE_STATUS");
+				stateRealStatus.setAttribute("value", stateMap[j].realStatus);
+				stateNode.appendChild(stateRealStatus);
+				stateNodes.appendChild(stateNode);
+			}
+		}
+		var transitionNodes = xmlDoc.createElement("Transitions");
+		transitionNodes.setAttribute("deletedTransitions", deletedTransitions);
+		xmlDoc.documentElement.appendChild(transitionNodes);
+		for ( var e = 0; e < allEventList.length; e++) {
+			var eventTransition = xmlDoc.createElement("event");
+			eventTransition.setAttribute("name", allEventList[e]);
+			transitionNodes.appendChild(eventTransition);
+			var x = jsPlumb.getDefaultScope();
+			jsPlumb
+					.select({
+						scope : x
+					})
+					.each(
+							function(currentConnection) {
+								if (currentConnection.sourceName != null
+										&& currentConnection.done == false
+										&& currentConnection.eventname == allEventList[e]) {
+									currentSource = currentConnection.sourceName;
+									var y = jsPlumb.getDefaultScope();
+									jsPlumb
+											.select({
+												scope : y
+											})
+											.each(
+													function(connection) {
+														if (connection.sourceName == currentSource
+																&& connection.done == false
+																&& connection.eventname == currentConnection.eventname) {
+															currentConnection.done = true;
+															connection.done = true;
+															var transitionNode = xmlDoc
+																	.createElement("transition");
+															transitionNode
+																	.setAttribute(
+																			"sourceState",
+																			currentSource);
+															if (currentConnection.connectionId != null) {
+																transitionNode
+																		.setAttribute(
+																				"id",
+																				currentConnection.connectionId);
+															}
+															if (currentConnection.doPreAction != null) {
+																transitionNode
+																		.setAttribute(
+																				"doPreAction",
+																				currentConnection.doPreAction);
+															}
+															if (currentConnection.connectionFlag == "Ok") {
+																if (currentConnection.targetName != null) {
+																	transitionNode
+																			.setAttribute(
+																					"targetStateOk",
+																					currentConnection.targetName);
+																}
+																if (currentConnection.postAction != null) {
+																	transitionNode
+																			.setAttribute(
+																					"postActionOk",
+																					currentConnection.postAction);
+																	if (currentConnection.postAction == "1") {
+																		if (currentConnection.postActionPackageName != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkPackageName",
+																							currentConnection.postActionPackageName);
+																		}
+																		if (currentConnection.postActionChargeMode != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkChargeMode",
+																							currentConnection.postActionChargeMode);
+																		}
+																	} else if (currentConnection.postAction == "2") {
+																		if (currentConnection.postActionPackageName != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkProcessName",
+																							currentConnection.postActionPackageName);
+																		}
+																	} else if (currentConnection.postAction == "3") {
+																		if (currentConnection.postActionWSUrl != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkWebServiceUrl",
+																							currentConnection.postActionWSUrl);
+																		}
+																		if (currentConnection.postActionWSLogin != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkWebServiceLogin",
+																							currentConnection.postActionWSLogin);
+																		}
+																		if (currentConnection.postActionWSPassword != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkWebServicePassword",
+																							currentConnection.postActionWSPassword);
+																		}
+																	}
+																}
+																if (connection.connectionFlag == "Ko") {
+																	if (connection.targetName != null) {
+																		transitionNode
+																				.setAttribute(
+																						"targetStateKo",
+																						connection.targetName);
+																	}
+																	if (connection.postAction != null) {
+																		transitionNode
+																				.setAttribute(
+																						"postActionKo",
+																						connection.postAction);
+																		if (connection.postAction == "1") {
+																			if (connection.postActionPackageName != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoPackageName",
+																								connection.postActionPackageName);
+																			}
+																			if (connection.postActionChargeMode != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoChargeMode",
+																								connection.postActionChargeMode);
+																			}
+																		} else if (connection.postAction == "2") {
+																			if (connection.postActionPackageName != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoProcessName",
+																								connection.postActionPackageName);
+																			}
+																		} else if (connection.postAction == "3") {
+																			if (connection.postActionWSUrl != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoWebServiceUrl",
+																								connection.postActionWSUrl);
+																			}
+																			if (connection.postActionWSLogin != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoWebServiceLogin",
+																								connection.postActionWSLogin);
+																			}
+																			if (connection.postActionWSPassword != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionKoWebServicePassword",
+																								connection.postActionWSPassword);
+																			}
+																		}
+																	}
+																}
+															} else if (currentConnection.connectionFlag == "Ko") {
+																if (currentConnection.targetName != null) {
+																	transitionNode
+																			.setAttribute(
+																					"targetStateKo",
+																					currentConnection.targetName);
+																}
+																if (currentConnection.postAction != null) {
+																	transitionNode
+																			.setAttribute(
+																					"postActionKo",
+																					currentConnection.postAction);
+																	if (currentConnection.postAction == "1") {
+																		if (currentConnection.postActionPackageName != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionKoPackageName",
+																							currentConnection.postActionPackageName);
+																		}
+																		if (currentConnection.postActionChargeMode != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionKoChargeMode",
+																							currentConnection.postActionChargeMode);
+																		}
+																	} else if (currentConnection.postAction == "2") {
+																		if (currentConnection.postActionPackageName != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionKoProcessName",
+																							currentConnection.postActionPackageName);
+																		}
+																	} else if (currentConnection.postAction == "3") {
+																		if (currentConnection.postActionWSUrl != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionKoWebServiceUrl",
+																							currentConnection.postActionWSUrl);
+																		}
+																		if (currentConnection.postActionWSLogin != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionKoWebServiceLogin",
+																							currentConnection.postActionWSLogin);
+																		}
+																		if (currentConnection.postActionWSPassword != null) {
+																			transitionNode
+																					.setAttribute(
+																							"postActionOkWebServicePassword",
+																							currentConnection.postActionWSPassword);
+																		}
+																	}
+																}
+																if (connection.connectionFlag == "Ok") {
+																	if (connection.targetName != null) {
+																		transitionNode
+																				.setAttribute(
+																						"targetStateOk",
+																						connection.targetName);
+																	}
+																	if (connection.postAction != null) {
+																		transitionNode
+																				.setAttribute(
+																						"postActionOk",
+																						connection.postAction);
+																		if (connection.postAction == "1") {
+																			if (connection.postActionPackageName != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkPackageName",
+																								connection.postActionPackageName);
+																			}
+																			if (connection.postActionChargeMode != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkChargeMode",
+																								connection.postActionChargeMode);
+																			}
+																		} else if (connection.postAction == "2") {
+																			if (connection.postActionPackageName != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkProcessName",
+																								connection.postActionPackageName);
+																			}
+																		} else if (connection.postAction == "3") {
+																			if (connection.postActionWSUrl != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkWebServiceUrl",
+																								connection.postActionWSUrl);
+																			}
+																			if (connection.postActionWSLogin != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkWebServiceLogin",
+																								connection.postActionWSLogin);
+																			}
+																			if (connection.postActionWSPassword != null) {
+																				transitionNode
+																						.setAttribute(
+																								"postActionOkWebServicePassword",
+																								connection.postActionWSPassword);
+																			}
+																		}
+																	}
+																}
+															}
+															eventTransition
+																	.appendChild(transitionNode);
+														}
+													});
+									if (currentConnection.done == false) {
+										currentConnection.done = true;
+										var transitionNode = xmlDoc
+												.createElement("transition");
+										transitionNode.setAttribute(
+												"sourceState", currentSource);
+										if (currentConnection.connectionId != null) {
+											transitionNode
+													.setAttribute(
+															"id",
+															currentConnection.connectionId);
+										}
+										if (currentConnection.doPreAction != null) {
+											transitionNode
+													.setAttribute(
+															"doPreAction",
+															currentConnection.doPreAction);
+										}
+										if (currentConnection.connectionFlag == "Ok") {
+											if (currentConnection.targetName != null) {
+												transitionNode
+														.setAttribute(
+																"targetStateOk",
+																currentConnection.targetName);
+											}
+											if (currentConnection.postAction != null) {
+												transitionNode
+														.setAttribute(
+																"postActionOk",
+																currentConnection.postAction);
+												if (currentConnection.postAction == "1") {
+													if (currentConnection.postActionPackageName != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkPackageName",
+																		currentConnection.postActionPackageName);
+													}
+													if (currentConnection.postActionChargeMode != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkChargeMode",
+																		currentConnection.postActionChargeMode);
+													}
+												} else if (currentConnection.postAction == "2") {
+													if (currentConnection.postActionPackageName != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkProcessName",
+																		currentConnection.postActionPackageName);
+													}
+												} else if (currentConnection.postAction == "3") {
+													if (currentConnection.postActionWSUrl != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkWebServiceUrl",
+																		currentConnection.postActionWSUrl);
+													}
+													if (currentConnection.postActionWSLogin != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkWebServiceLogin",
+																		currentConnection.postActionWSLogin);
+													}
+													if (currentConnection.postActionWSPassword != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkWebServicePassword",
+																		currentConnection.postActionWSPassword);
+													}
+												}
+											}
+										} else if (currentConnection.connectionFlag == "Ko") {
+											if (currentConnection.targetName != null) {
+												transitionNode
+														.setAttribute(
+																"targetStateKo",
+																currentConnection.targetName);
+											}
+											if (currentConnection.postAction != null) {
+												transitionNode
+														.setAttribute(
+																"postActionKo",
+																currentConnection.postAction);
+												if (currentConnection.postAction == "1") {
+													if (currentConnection.postActionPackageName != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionKoPackageName",
+																		currentConnection.postActionPackageName);
+													}
+													if (currentConnection.postActionChargeMode != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionKoChargeMode",
+																		currentConnection.postActionChargeMode);
+													}
+												} else if (currentConnection.postAction == "2") {
+													if (currentConnection.postActionPackageName != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionKoProcessName",
+																		currentConnection.postActionPackageName);
+													}
+												} else if (currentConnection.postAction == "3") {
+													if (currentConnection.postActionWSUrl != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionKoWebServiceUrl",
+																		currentConnection.postActionWSUrl);
+													}
+													if (currentConnection.postActionWSLogin != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionKoWebServiceLogin",
+																		currentConnection.postActionWSLogin);
+													}
+													if (currentConnection.postActionWSPassword != null) {
+														transitionNode
+																.setAttribute(
+																		"postActionOkWebServicePassword",
+																		currentConnection.postActionWSPassword);
+													}
+												}
+											}
+										}
+										eventTransition
+												.appendChild(transitionNode);
+									}
+								}
+							});
+		}
+		var serializer = new XMLSerializer();
+		var dataXml = serializer.serializeToString(xmlDoc);
+		alert(dataXml);
+		saveLifeCycleRemoteCmd([ {
+			name : "editedLifeCycle",
+			value : dataXml
+		} ]);
+	} else {
+		alert("Your browser does not support this example");
+	}
+}
+if (window.XMLHttpRequest) {
+	xhttp = new XMLHttpRequest();
+} else // IE 5/6
+{
+	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xhttp.open("GET", "lifecycle_xml.xml", false);
+xhttp.send();
+xmlFile = xhttp.responseXML;
+var lastStateId = xmlFile.getElementsByTagName("States")[0].attributes
+		.getNamedItem("last_state_id").nodeValue;
+var transitionId = xmlFile.getElementsByTagName("Transitions")[0].attributes
+		.getNamedItem("lastTransitionId").nodeValue;
+// var lastIdPostAction =
+// xmlFile.getElementsByTagName("Transitions")[0].attributes
+// .getNamedItem("lastIdPostAction").nodeValue;
+// var lastPostActionId =
+// xmlFile.getElementsByTagName("Transitions")[0].attributes
+// .getNamedItem("lastPostActionId").nodeValue;
+;
+function getStateIdByName(stateToFind) {
+	var stateList = xmlFile.getElementsByTagName("State");
+	var i = 0;
+	var find = false;
+	while (find == false && i < stateList.length) {
+		state_name = stateList[i].attributes.getNamedItem("state_name").nodeValue;
+		if (state_name == stateToFind) {
+			stateId = stateList[i].attributes.getNamedItem("state_id").nodeValue;
+			find = true;
+		}
+		i++;
+	}
+	if (find)
+		return stateId;
+	else
+		return 0;
+}
+
+function getStatesIdByName(stateToFind) {
+	var i = 4;
+	var find = false;
+	while (find == false && i < stateMap.length) {
+		state_name = stateMap[i].name;
+		if (state_name == stateToFind) {
+			stateId = i;
+			find = true;
+		}
+		i++;
+	}
+	if (find)
+		return stateId;
+	else
+		return 0;
+}
+var globalElement;
+function addState() {
+	// sets the draggable and define its options
+	$('#3.window').draggable({
+		cursor : 'move', // sets the cursor apperance
+		revert : 'invalid', // makes the item to return if it isn't
+		// placed into chart lifecycle area
+		revertDuration : 70, // duration while the item returns
+		// to its place
+		start : function(event, ui) {
+			globalElement = $(this);
+		},
+		stop : function(event, ui) {
+			globalElement = null;
+		},
+	});
+	$(document).ready(
+			function() {
+				// define options for droppable windows
+				$('#lifeCycleChart').droppable(
+						{
+							activeClass : 'changeColor',
+							drop : function(event, ui) {
+								if (ui.draggable.attr("id") == 3) {
+									var Palette = document
+											.getElementById('Palette');
+									var stateToAdd = document
+											.createElement('div');
+									stateToAdd.setAttribute('id', 3);
+									stateToAdd.setAttribute('class', 'window');
+									Palette.appendChild(stateToAdd);
+									$('#3.window').draggable({
+										cursor : 'move',
+										revert : 'invalid',
+										revertDuration : 70,
+										start : function(event, ui) {
+											globalElement = $(this);
+										},
+										stop : function(event, ui) {
+											globalElement = null;
+										},
+									});
+									lastStateId++;
+									ui.draggable.attr("id", lastStateId);
+									ui.draggable.attr("class",
+											"state ui-draggable ");
+									save = false;
+									showStateDialog(lastStateId);
+									globalElement.detach().appendTo($(this));
+									stateMap[lastStateId] = ui.draggable;
+									ui.draggable.attr('ondblclick',
+											'showEditStateDialog('
+													+ lastStateId + ')');
+								}
+							}
+						});
+			});
+}
+var removeFromStatesList = "";
+function showStateDialog(lastStateId) {
+	console.debug("show dialog init State call");
+	clickedStateId = lastStateId;
+	stateInitDlg.show();
+}
+
+function checkStateParam() {
+	if (save == false) {
+		var remove = document.getElementById(clickedStateId);
+		remove.parentNode.removeChild(remove);
+		lastStateId--;
+	}
+}
+
+function initStateParameters(xhr, status, args) {
+	if (args.validationFailed) {
+		alert("Validation Failed");
+	} else {
+		console.debug("hide init State dialog call");
+		if (args.stateParameters.stateName != "") {
+			save = true;
+			var currentState = document.getElementById(clickedStateId);
+			var stateName = document.createElement('strong');
+			stateName.innerHTML = args.stateParameters.stateName;
+			currentState.appendChild(stateName);
+			var period = document.createElement('h4');
+			var M = args.stateParameters.months;
+			var D = args.stateParameters.days;
+			var H = args.stateParameters.hours;
+			var mSignal = args.stateParameters.monthSignal;
+			var dSignal = args.stateParameters.daySignal;
+			var hSignal = args.stateParameters.hourSignal;
+			period.innerHTML = "P= " + mSignal + M + "M " + dSignal + D + "D "
+					+ hSignal + H + "H";
+			currentState.appendChild(period);
+			var sourcePoint = document.createElement('div');
+			sourcePoint.setAttribute('class', 'ep');
+			currentState.appendChild(sourcePoint);
+			stateMap[clickedStateId].name = args.stateParameters.stateName;
+			stateMap[clickedStateId].period = mSignal + M + "M " + dSignal + D
+					+ "D " + hSignal + H + "H";
+			stateMap[clickedStateId].rechargeDetector = args.stateParameters.rechargeDetector;
+			stateMap[clickedStateId].realStatus = args.stateParameters.stateRealStatus;
+			removeFromStatesList = "";
+			$(".state").each(
+					function(i, e) {
+						jsPlumb.makeSource($(e), {
+							connectionsDetachable : false,
+							filter : ".ep",
+							connectorStyle : {
+								lineWidth : 2,
+								strokeStyle : "#990000",
+								joinstyle : "round",
+								outlineColor : "#EAEDEF",
+								outlineWidth : 3,
+							},
+							connector : [ "Flowchart", {
+								stub : [ 40, 40 ],
+								gap : 10,
+							} ],
+							anchor : "Continuous",
+							maxConnections : 10,
+							onMaxConnections : function(info, e) {
+								alert("Maximum connections ("
+										+ info.maxConnections + ") reached");
+							}
+						});
+					});
+			jsPlumb.makeTarget($(".state"), {
+				dropOptions : {
+					hoverClass : "dragHover"
+				},
+				anchor : "Continuous",
+				deleteEndpointsOnDetach : false
+			});
+			jsPlumb.bind("connection", function(info) {
+				info.connection.getOverlay("label").setLabel(
+						"Configurer cette transition");
+
+			});
+		}
+		stateInitDlg.hide();
+		clickedStateId = null;
+	}
+}
+
+function showEditStateDialog(stateId) {
+	var clickedState = stateMap[stateId];
+	clickedStateRemoteCmd([ {
+		name : "clickedStateParameters",
+		value : clickedState.name + ',' + clickedState.period + ','
+				+ clickedState.rechargeDetector + '#' + clickedState.realStatus
+	} ]);
+	console.debug("show dialog edit State call");
+	stateEditDlg.show();
+	currentStateId = stateId;
+
+}
+
+function editStateParameters(xhr, status, args) {
+	if (args.validationFailed) {
+		alert("Validation Failed");
+	} else {
+		if (args.stateParameters.stateName != "") {
+			save = true;
+			var currentState = document.getElementById(currentStateId);
+			currentState.firstChild.innerHTML = args.stateParameters.stateName;
+			var x = jsPlumb.getDefaultScope();
+			jsPlumb.select({
+				scope : x
+			}).each(function(connection) {
+				if (connection.sourceName == stateMap[currentStateId].name) {
+					connection.sourceName = args.stateParameters.stateName;
+				}
+				if (connection.targetName == stateMap[currentStateId].name) {
+					connection.targetName = args.stateParameters.stateName;
+					alert(connection.targetName);
+				}
+			});
+			var M = args.stateParameters.months;
+			var D = args.stateParameters.days;
+			var H = args.stateParameters.hours;
+			var mSignal = args.stateParameters.monthSignal;
+			var dSignal = args.stateParameters.daySignal;
+			var hSignal = args.stateParameters.hourSignal;
+			currentState.childNodes[1].innerHTML = "P= " + mSignal + M + "M "
+					+ dSignal + D + "D " + hSignal + H + "H";
+			stateMap[currentStateId].name = args.stateParameters.stateName;
+			stateMap[currentStateId].period = mSignal + M + "M " + dSignal + D
+					+ "D " + hSignal + H + "H";
+			stateMap[currentStateId].rechargeDetector = args.stateParameters.rechargeDetector;
+			stateMap[currentStateId].realStatus = args.stateParameters.stateRealStatus;
+		}
+		console.debug("hide edit State dialog call");
+		stateEditDlg.hide();
+		currentStateId = null;
+	}
+}
+
+function showTransitionInitDialog(connection) {
+	transitionSource = connection.sourceId;
+	transitionTarget = connection.targetId;
+	console.debug("show dialog Init call");
+	transitionInitDlg.show();
+}
+
+function initTransitionParameters(xhr, status, args) {
+	if (args.validationFailed) {
+		alert("Validation Failed");
+	} else {
+		console.debug("hide dialog call");
+		init = function(conn) {
+			conn.getOverlay("label").setLabel(
+					args.transitionParameters.eventName);
+			transitionId++;
+			conn.connectionId = transitionId;
+			conn.eventname = args.transitionParameters.eventName;
+			conn.doPreAction = args.transitionParameters.doPreAction;
+			if (conn.doPreAction == "true") {
+				alert(args.transitionParameters.transitionFlag);
+				conn.connectionFlag = args.transitionParameters.transitionFlag;
+			} else {
+				conn.connectionFlag = "Ok";
+			}
+			conn.sourceName = document.getElementById(transitionSource).firstChild.innerHTML;
+			conn.targetName = document.getElementById(transitionTarget).firstChild.innerHTML;
+			conn.done = false;
+			conn.postAction = args.transitionParameters.postAction;
+			conn.postActionPackageName = args.transitionParameters.packageName;
+			conn.postActionChargeMode = args.transitionParameters.chargeMode;
+			conn.postActionProcessName = args.transitionParameters.processName;
+			conn.postActionWSUrl = args.transitionParameters.webServiceUrl;
+			conn.postActionWSLogin = args.transitionParameters.webServiceLogin;
+			conn.postActionWSPassword = args.transitionParameters.webServicePassword;
+
+		};
+		jsPlumb.bind("connection", function(connInfo, originalEvent) {
+			init(connInfo.connection);
+		});
+		jsPlumb.connect({
+			source : transitionSource,
+			target : transitionTarget
+		});
+		transitionInitDlg.hide();
+	}
+	transitionSource = null;
+	transitionTarget = null;
+}
+function showTransitionEditDialog(connection) {
+	clickedTransitionRemoteCmd([ {
+		name : "clickedTransitionParameters",
+		value : clickedState.name + ',' + clickedState.period + ','
+				+ clickedState.rechargeDetector + '#' + clickedState.realStatus
+	} ]);
+	console.debug("show Transition EDIT dialog call");
+	transitionEditDlg.show();
+}
+function updateTransitionParameters(xhr, status, args) {
+	if (args.validationFailed) {
+		alert("Validation Failed");
+	} else {
+		console.debug("hide dialog call");
+		init = function(conn) {
+			conn.getOverlay("label").setLabel(
+					args.transitionParameters.eventName);
+			conn.eventname = args.transitionParameters.eventName;
+			transitionId++;
+			conn.connectionId = transitionId;
+			conn.connectionFlag = args.transitionParameters.transitionFlag;
+			conn.doPreAction = args.transitionParameters.doPreAction;
+			conn.postAction = args.transitionParameters.postAction;
+			conn.done = false;
+			transitionInitDlg.hide();
+		};
+		jsPlumb.bind("connection", function(connInfo, originalEvent) {
+			init(connInfo.connection);
+		});
+		jsPlumb.connect({
+			source : transitionSource,
+			target : transitionTarget
+		});
+	}
+}
+var stateId = 3;
+function states() {
+	currentSncode = xmlFile.getElementsByTagName("LifeCycleModel")[0].attributes
+			.getNamedItem("sncode").nodeValue;
+	var stateList = xmlFile.getElementsByTagName("State");
+	var top = 440;
+	var left = 50;
+	var bool = 0;
+	for ( var i = 0; i < stateList.length; i++) {
+		var state_name = stateList[i].attributes.getNamedItem("state_name").nodeValue;
+		stateId = stateList[i].attributes.getNamedItem("state_id").nodeValue;
+		var chart = document.getElementById('lifeCycleChart');
+		var state = document.createElement('div');
+		state.setAttribute('id', stateId);
+		state.setAttribute('class', 'state');
+		state
+				.setAttribute('ondblclick', 'showEditStateDialog(' + stateId
+						+ ')');
+		state.style.left = left;
+		state.style.top = top;
+		chart.appendChild(state);
+
+		if (bool == 0) {
+			top = top - 360;
+			left = left + 100;
+			bool = 1;
+		} else {
+			top = top + 650;
+			left = left + 350;
+			bool = 0;
+		}
+		var name = document.createElement('strong');
+		name.innerHTML = state_name;
+		state.appendChild(name);
+		var state_period = (stateList[i].childNodes[3]).getAttribute("value");
+		var period = document.createElement('h4');
+		period.innerHTML = "P= " + state_period;
+		state.appendChild(period);
+		var sourcePoint = document.createElement('div');
+		sourcePoint.setAttribute('class', 'ep');
+		state.appendChild(sourcePoint);
+		state.name = state_name;
+		state.period = state_period;
+		state.rechargeDetector = (stateList[i].childNodes[1])
+				.getAttribute("value");
+		state.realStatus = (stateList[i].childNodes[5]).getAttribute("value");
+		stateMap[stateId] = state;
+
+	}
+	jsPlumb.draggable(jsPlumb.getSelector(".state"));
+	$(".state").each(
+			function(i, e) {
+				jsPlumb.makeSource($(e), {
+					connectionsDetachable : false,
+					filter : ".ep",
+					connectorStyle : {
+						lineWidth : 2,
+						strokeStyle : "#990000",
+						joinstyle : "round",
+						outlineColor : "#EAEDEF",
+						outlineWidth : 3,
+					},
+					connector : [ "Flowchart", {
+						stub : [ 40, 40 ],
+						gap : 10,
+					} ],
+					anchor : "Continuous",
+					maxConnections : 10,
+					onMaxConnections : function(info, e) {
+						alert("Maximum connections (" + info.maxConnections
+								+ ") reached");
+					}
+				});
+			});
+	jsPlumb.makeTarget($(".state"), {
+		dropOptions : {
+			hoverClass : "dragHover"
+		},
+		anchor : "Continuous",
+		deleteEndpointsOnDetach : false
+	});
+}
+function events() {
+	var eventList = xmlFile.getElementsByTagName("event");
+	var event_name = null;
+	var id = null;
+	var doPreAction = null;
+	var targetState = null;
+	var postAction = null;
+	for ( var k = 0; k < eventList.length; k++) {
+		event_name = eventList[k].attributes.getNamedItem("name").nodeValue;
+		var transitionList = eventList[k].getElementsByTagName("transition");
+		for ( var l = 0; l < transitionList.length; l++) {
+			id = transitionList[l].attributes.getNamedItem("id").nodeValue;
+			if (transitionList[l].attributes.getNamedItem("doPreAction") != null)
+				doPreAction = transitionList[l].attributes
+						.getNamedItem("doPreAction").nodeValue;
+			var source_state = transitionList[l].attributes
+					.getNamedItem("sourceState").nodeValue;
+			var source_state_id = getStateIdByName(source_state);
+			if (transitionList[l].attributes.getNamedItem("targetStateOk") != null) {
+				var flagOk = "Ok";
+				var target_state_ok = transitionList[l].attributes
+						.getNamedItem("targetStateOk").nodeValue;
+				if (getStateIdByName(target_state_ok) != 0) {
+					targetState = target_state_ok;
+					if (transitionList[l].attributes
+							.getNamedItem("postActionOk") != null)
+						postAction = transitionList[l].attributes
+								.getNamedItem("postActionOk").nodeValue;
+					init = function(connection) {
+						connection.eventname = event_name;
+						connection.connectionId = id;
+						connection.sourceName = source_state;
+						connection.connectionFlag = flagOk;
+						connection.targetName = targetState;
+						connection.doPreAction = doPreAction;
+						connection.postAction = postAction;
+						connection.done = false;
+						connection.getOverlay("label").setLabel(event_name);
+					};
+					jsPlumb.bind("connection",
+							function(connInfo, originalEvent) {
+								init(connInfo.connection);
+							});
+					jsPlumb.connect({
+						source : source_state_id,
+						target : getStateIdByName(target_state_ok),
+					});
+				}
+				id = null;
+				doPreAction = null;
+				targetState = null;
+				postAction = null;
+			}
+			if (transitionList[l].attributes.getNamedItem("targetStateKo") != null) {
+				var flagKo = "Ko";
+				var target_state_ko = transitionList[l].attributes
+						.getNamedItem("targetStateKo").nodeValue;
+				if (getStateIdByName(target_state_ko) != 0) {
+					targetState = target_state_ko;
+					if (transitionList[l].attributes
+							.getNamedItem("postActionKo") != null)
+						postAction = transitionList[l].attributes
+								.getNamedItem("postActionKo").nodeValue;
+					init = function(connection) {
+						connection.eventname = event_name;
+						connection.connectionId = id;
+						connection.sourceName = source_state;
+						connection.connectionFlag = flagKo;
+						connection.targetName = targetState;
+						connection.doPreAction = doPreAction;
+						connection.postAction = postAction;
+						connection.done = false;
+						connection.getOverlay("label").setLabel(event_name);
+					};
+					jsPlumb.bind("connection",
+							function(connInfo, originalEvent) {
+								init(connInfo.connection);
+							});
+					jsPlumb.connect({
+						source : source_state_id,
+						target : getStateIdByName(target_state_ko),
+					});
+					jsPlumb.connect({
+						source : source_state_id,
+						target : getStateIdByName(target_state_ko),
+					});
+				}
+				id = null;
+				doPreAction = null;
+				targetState = null;
+				postAction = null;
+			}
+		}
+		event_name = null;
+	}
+}
+function lifeCycle() {
+	jsPlumb.bind("beforeDrop", function(info) {
+		showTransitionInitDialog(info);
+	});
+	jsPlumb.bind("click", function(connection) {
+		showTransitionEditDialog(connection);
+	});
+	jsPlumb.bind("contextmenu", function(conn) {
+		if (confirm("Vous désirez supprimer cette transition entre "
+				+ conn.sourceName + " et " + conn.targetName + "?"))
+			jsPlumb.detach(conn);
+		if (conn.connectionId < transitionId) {
+			d++;
+			transitionsToDelete[d] = conn.connectionId;
+
+		}
+	});
+	states();
+	events();
+	addState();
+}
+window.onload = lifeCycle;

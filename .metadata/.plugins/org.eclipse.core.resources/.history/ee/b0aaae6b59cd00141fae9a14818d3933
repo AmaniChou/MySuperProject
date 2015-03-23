@@ -1,0 +1,23 @@
+
+ 
+    	<ui:composition 
+    	xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    	template="/template/LoginContent.xhtml"
+    	xmlns:p="http://primefaces.org/ui" >
+    	<ui:define name="LoginContent">
+    	<p:panel>
+    	<p:outputLabel>LOGIN</p:outputLabel>
+    	<p:inputText></p:inputText>
+    	
+    	<p:outputLabel>PASS</p:outputLabel>
+    	<p:inputText></p:inputText>
+    	
+    	<p:button value="connexion"></p:button>
+    	
+    	</p:panel>
+    	</ui:define>
+    	</ui:composition>
+ 
+ 

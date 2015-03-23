@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+    <body>
+	    <ui:composition>
+ 
+		<h1>This is default content</h1>
+			
+<p:layout style="min-width:400px;min-height:200px;">
+    <p:form> 
+    <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+        <p:tieredMenu style="width:200px">
+        <p:submenu label="Ajax Menuitems" >
+            <p:menuitem value="Save"  update="messages"  />
+            <p:menuitem value="Update"  update="messages" />
+        </p:submenu>
+        <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
+            <p:menuitem value="Delete"  update="messages" ajax="false"  />
+        </p:submenu>
+        <p:separator />
+        <p:submenu label="Navigations" icon="ui-icon-extlink">
+            <p:submenu label="Prime Links">
+                <p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
+                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+            </p:submenu>
+            <p:menuitem value="Mobile" outcome="/mobile/index" />
+        </p:submenu>
+    </p:tieredMenu>
+    
+    </p:form>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center">
+        Center
+    </p:layoutUnit>
+</p:layout>
+ 
+	    </ui:composition>
+    </body>
+</html>

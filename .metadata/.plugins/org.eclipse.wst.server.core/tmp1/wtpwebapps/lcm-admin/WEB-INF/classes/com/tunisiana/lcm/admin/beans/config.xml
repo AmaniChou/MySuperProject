@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ConfigurationLifeCycle Name="wapchat" sncode="600">
+    <States last_state_id="9">
+        <State state_id="4" state_name="SMS_EXPIRATION">
+            <state_param value="false" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="activated" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+        <State state_id="5" state_name="INITIALE">
+            <state_param value="false" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="activated" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+        <State state_id="6" state_name="ACTIVE">
+            <state_param value="false" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="activated" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+        <State state_id="7" state_name="GRACE">
+            <state_param value="true" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="grace" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+        <State state_id="8" state_name="FINALE">
+            <state_param value="false" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="diactivated" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+        <State state_id="9" state_name="RAPPEL">
+            <state_param value="true" parameter="IF_RECHARGE_DETECTOR"/>
+            <state_param value="+0M +0D +0H" parameter="PERIOD"/>
+            <state_param value="grace" parameter="REAL_SERIVCE_STATUS"/>
+        </State>
+    </States>
+    <Transitions lastTransitionId="1313">
+        <event name="RECHARGE_DETECTOR">
+            <transition id="19" postActionOk="161" targetStateOk="ACTIVE" sourceState="GRACE" doPreAction="true"/>
+            <transition id="26" postActionOk="162" targetStateOk="ACTIVE" sourceState="RAPPEL" doPreAction="true"/>
+        </event>
+        <event name="DATE_ATTEINTE">
+            <transition postActionOkProcessName="process" id="18" postActionKo="165" postActionOk="164" targetStateKo="GRACE" targetStateOk="ACTIVE" sourceState="SMS_EXPIRATION" doPreAction="true"/>
+            <transition id="17" postActionKo="170" postActionOk="169" targetStateKo="GRACE" targetStateOk="SMS_EXPIRATION" sourceState="ACTIVE" doPreAction="false"/>
+            <transition id="20" postActionKo="175" postActionOk="174" targetStateKo="GRACE" targetStateOk="RAPPEL" sourceState="GRACE" doPreAction="false"/>
+            <transition id="25" postActionKo="180" postActionOk="179" targetStateKo="GRACE" targetStateOk="FINALE" sourceState="RAPPEL" doPreAction="false"/>
+        </event>
+        <event name="ACTIVATION">
+            <transition id="13" postActionOk="161" targetStateOk="ACTIVE" sourceState="INITIALE" doPreAction="false"/>
+        </event>
+        <event name="DESACTIVATION">
+            <transition id="24" postActionOk="161" targetStateOk="FINALE" sourceState="SMS_EXPIRATION" doPreAction="false"/>
+            <transition id="22" postActionOk="162" targetStateOk="FINALE" sourceState="ACTIVE" doPreAction="false"/>
+            <transition id="23" postActionOk="163" targetStateOk="FINALE" sourceState="GRACE" doPreAction="false"/>
+            <transition postActionOkProcessName="process" id="27" postActionOk="164" targetStateOk="FINALE" sourceState="RAPPEL" doPreAction="false"/>
+        </event>
+    </Transitions>
+</ConfigurationLifeCycle>

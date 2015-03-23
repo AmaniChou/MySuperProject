@@ -1,0 +1,55 @@
+package com.tunisiana.lcm.entities;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+@Entity
+@Table(name="LCM_CONTEXT_HISTORY")
+public class LcmConextHistory {
+	
+
+	@Id
+	@Column(name="ID")
+	int id;
+	
+	@Column(name = "VERSION")
+	int version;
+	
+	@Column(name = "EXPIRATION_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date entry_date;
+	
+	@Column(name="STATE")
+	String state;
+	
+	@Column(name="MSISDN")
+	String msisdn ;
+	
+	@Column(name="SNCODE")
+	int sncode;
+	
+	@Column(name = "CREATION_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creation_date;
+
+	@Column(name="DESCRIPTION")
+	String description ;
+	
+	@Column(name="COUNTER_VALUE")
+	int counter_value;
+	
+	@Column(name="EVENT_NAME")
+	String event_name ;
+	
+	@Column(name = "TIMER_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timer_date;
+	
+}

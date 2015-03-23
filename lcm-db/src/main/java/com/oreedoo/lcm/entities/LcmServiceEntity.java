@@ -1,0 +1,113 @@
+package com.oreedoo.lcm.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="LCM_SERVICE")
+public class LcmServiceEntity {
+	@Id
+	@Column(name="SNCODE")
+	long sncode ;
+	
+	@Column(name="VERSION")
+	long version;
+	
+	@Column(name="BIRTHDAY_FLAG")
+	long birthday_flag;
+	
+	@Column(name="NAME")
+	String name ;
+	
+	@Column(name="ACTIVATION_DATE_STRATEGY")
+	String activation_date_strategy_;
+	
+	@Column(name="PRELEVEMENT_PRIORITY")
+	long prelevement_priority ;
+	
+	@Column(name="SERVICE_RENEWAL_FEE")
+	float service_renewal_fee;
+	
+	@Column(name="TIMER_INSTANCES")
+	String timer_instances ;
+	
+	@Column(name="PACK_NAME")
+	String pack_name;
+
+	public long getSncode() {
+		return sncode;
+	}
+
+	public void setSncode(long sncode) {
+		this.sncode = sncode;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	public long getBirthday_flag() {
+		return birthday_flag;
+	}
+
+	public void setBirthday_flag(long birthday_flag) {
+		this.birthday_flag = birthday_flag;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getActivation_date_strategy_() {
+		return activation_date_strategy_;
+	}
+
+	public void setActivation_date_strategy_(String activation_date_strategy_) {
+		this.activation_date_strategy_ = activation_date_strategy_;
+	}
+
+	public long getPrelevement_priority() {
+		return prelevement_priority;
+	}
+
+	public void setPrelevement_priority(long prelevement_priority) {
+		this.prelevement_priority = prelevement_priority;
+	}
+
+	public float getService_renewal_fee() {
+		return service_renewal_fee;
+	}
+
+	public void setService_renewal_fee(float service_renewal_fee) {
+		this.service_renewal_fee = service_renewal_fee;
+	}
+
+	public String getTimer_instances() {
+		return timer_instances;
+	}
+
+	public void setTimer_instances(String timer_instances) {
+		this.timer_instances = timer_instances;
+	}
+
+	public String getPack_name() {
+		return pack_name;
+	}
+
+	public void setPack_name(String pack_name) {
+		this.pack_name = pack_name;
+	}
+	
+	
+
+}

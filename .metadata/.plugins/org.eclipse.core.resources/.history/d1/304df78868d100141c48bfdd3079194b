@@ -1,0 +1,70 @@
+package com.oreedoo.lcm.reporting.managedbeans;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
+@Named
+@RequestScoped
+public class LoginMBean {
+
+
+	private String login;
+	private String pass;
+	private String message;
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String connexion(){
+		
+//		message = "";
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		if (login != null && login.equals("admin") && pass != null
+//				&& pass.equals("admin")) {
+//			return "home?faces-redirect=true";
+//		}
+//		if (login == null || pass == null)
+//			return "login";
+//
+//		if (!login.equals("admin")) {
+//			message = "Identifiant incorrect";
+//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//					message, message);
+//			fc.addMessage("loginForm:login", msg);
+//		}
+//
+//		if (!pass.equals("admin")) {
+//			message = "Mot de passe incorrecte";
+//			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//					message, message);
+//			fc.addMessage("loginForm:pass", msg);
+//		}
+//
+//		return null;
+//		
+		return "home?faces-redirect=true";
+	}
+}

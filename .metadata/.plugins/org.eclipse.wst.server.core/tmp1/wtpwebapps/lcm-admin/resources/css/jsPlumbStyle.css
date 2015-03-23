@@ -1,0 +1,131 @@
+.window {
+	border: 3px solid #D60C0C;
+	box-shadow: 2px 2px 19px #aaa;
+	-o-box-shadow: 2px 2px 19px #aaa;
+	-webkit-box-shadow: 2px 2px 19px #aaa;
+	-moz-box-shadow: 2px 2px 19px #aaa;
+	-moz-border-radius: 1em;
+	border-radius: 8em;
+	opacity: 0.8;
+	filter: alpha(opacity =                                                         
+		 80);
+	width: 11em;
+	height: 6em;
+	line-height: 5em;
+	text-align: center;
+	z-index: 20;
+	position: absolute;
+	background-color:rgba(134, 138, 132, 0.15);
+	color: black;
+	font-family: helvetica;
+	padding: 0.5em;
+	font-size: 0.8em;
+}
+
+.state {
+	border: 3px solid #D60C0C;
+	box-shadow: 2px 2px 19px #aaa;
+	-o-box-shadow: 2px 2px 19px #aaa;
+	-webkit-box-shadow: 2px 2px 19px #aaa;
+	-moz-box-shadow: 2px 2px 19px #aaa;
+	-moz-border-radius: 1em;
+	border-radius: 8em;
+	opacity: 1;
+	filter: alpha(opacity =                                                         
+		 80);
+	width: 11em;
+	height: 6em;
+	line-height: 5em;
+	text-align: center;
+	z-index: 20;
+	position: absolute;
+	background-color:rgba(152, 248, 47, 0.28);
+	font-style:"color:red";
+	font-family: helvetica;
+	padding: 0.5em;
+	font-size: 0.8em;
+}
+
+.state:hover {
+background-color:red;
+color: white;
+}
+
+.aLabel {
+	background-color: rgb(248, 207, 207);
+	font: 14px sans-serif;
+	color: red;
+	z-index: 21;
+	border: 1px dotted gray;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+}
+
+
+._jsPlumb_endpoint {
+	z-index: 3;
+}
+
+.dragHover {
+	border: 1px dotted red;
+}
+
+.ep {
+	position: absolute;
+	top: 50%;
+	right: 45%;
+	width: 1em;
+	height: 1em;
+	background-color:blue;
+	cursor: pointer;
+}
+
+#lifeCycleChart {
+	width: 120%;
+	height: 240%;
+	margin-left: 11em;
+	margin-top: -1em;
+	position: relative;
+	background: rgb(250, 215, 215);
+	font-size: 16px;
+}
+
+#lifeCycleChart.changeColor {
+	background:rgba(82, 76, 75, 0.22);
+}
+
+#lifeCycleChart  #sw {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#Palette {
+	width: 30%;
+	height: 0em;
+	font-size: 16px;
+}
+
+#1 {
+	top: -4em;
+	left: -4em;
+}
+
+#2 {
+	top: -2em;
+	left: -1em;
+}
+
+#3 {
+	top: -2em;
+	left: -1em;
+}
+
+.hl {
+	border: 3px solid red;
+}
+
+.texte {
+	border: 1px dotted gray;
+}
+
+  .msg { width: 500px; height: 200px; }

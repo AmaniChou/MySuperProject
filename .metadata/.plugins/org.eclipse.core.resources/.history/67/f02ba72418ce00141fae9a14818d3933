@@ -1,0 +1,7 @@
+package com.tunisiana.lcm.dao;
+
+import com.tunisiana.lcm.entities.LcmLnkStateParameterEntity;
+
+public interface LcmLnkStateParameterDAO {
+	LcmLnkStateParameterEntity getLnkStateParam();
+}

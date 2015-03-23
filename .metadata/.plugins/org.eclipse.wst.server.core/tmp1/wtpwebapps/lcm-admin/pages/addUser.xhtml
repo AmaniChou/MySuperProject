@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="userForm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout Utilisateur" toggleable="true"
+				toggleSpeed="1000" id="panelaction">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nom Utilisateur : " />
+					<p:inputText value="#{lcmUsersBean.username}" id="username"
+						required="true"
+						requiredMessage="Vous devez enter le Nom Utilisateur!" />
+
+					<p:outputLabel value="Nom : " />
+					<p:inputText value="#{lcmUsersBean.firstname}" id="name"
+						required="true"
+						requiredMessage="Vous devez enter le prénom de l'utilisateur!" />
+
+					<p:outputLabel value="Prénom : " />
+					<p:inputText value="#{lcmUsersBean.lastname}" id="lastname"
+						required="true"
+						requiredMessage="Vous devez enter le nom de l'utilisateur!" />
+
+
+					<p:outputLabel value="Profil Utilisateur: " />
+					<p:selectOneMenu value="#{lcmUsersBean.profil}" effect="fade">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{lcmUsersBean.listProfilsName}"></f:selectItems>
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Etat Utilisateur: " />
+					<p:selectOneRadio id="etat" value="#{lcmUsersBean.enabled}">
+						<f:selectItem itemLabel="True" itemValue="1" />
+						<f:selectItem itemLabel="False" itemValue="0" />
+					</p:selectOneRadio>
+
+
+					<p:outputLabel value="Date Expiration: " />
+					<p:calendar value="#{lcmUsersBean.expiration_date}" id="date"
+						required="true"
+						requiredMessage="Vous devez saisir la date d'expiration!" />
+
+
+					<p:commandButton value="enregistrer" update="userForm"
+						actionListener="#{lcmUsersBean.addUser}" />
+					<p:commandButton value="annuler" update="userForm"
+						actionListener="#{lcmUsersBean.annuler}" />
+
+				</p:panelGrid>
+			</p:panel>
+			
+
+		</h:form>
+
+          <h:form>
+			<p:panel id="PanelList">
+				<p:commandButton value="Liste des utilisateurs"
+					actionListener="#{lcmUsersBean.backListUser()}" />
+			</p:panel>
+			</h:form>
+	</ui:define>
+
+</ui:composition>

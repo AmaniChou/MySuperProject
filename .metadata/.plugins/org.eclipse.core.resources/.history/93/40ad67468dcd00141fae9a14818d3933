@@ -1,0 +1,5 @@
+package com.tunisiana.lcm.entities;
+
+public class LcmServiceEntity {
+
+}

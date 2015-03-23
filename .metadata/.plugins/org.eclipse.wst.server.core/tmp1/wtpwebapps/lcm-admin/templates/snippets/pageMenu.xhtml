@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="menuForm2">
+    <p:growl id="messages" autoUpdate="true"/>
+    <p:panelMenu style="width:200px">
+        <p:submenu label="Gestion des services">
+            <p:menuitem value="Consulter les services"    url="/pages/listService.jsf"  ajax="false"  />
+            <p:menuitem value="Configurer un nouveau service"   ajax="false" icon="ui-icon-info  " />
+        </p:submenu>
+        <p:separator />      
+        <p:submenu label="Gestion des Etats">
+            <p:menuitem value="Consulter les �tats"  ajax="false" />
+            <p:menuitem value="Ajouter un �tat"   ajax="false" /> 
+        </p:submenu>
+        <p:separator />
+         <p:submenu label="Gestion des Actions">
+            <p:menuitem value="Consulter les actions"  ajax="false" />
+            <p:menuitem value="Ajouter une action"   ajax="false" /> 
+        </p:submenu>
+        
+        <p:separator />
+        
+         <p:submenu label="Simulation"> 
+        </p:submenu>
+        
+        <p:separator />
+        
+          <p:submenu label="Migration">
+            <p:menuitem value="Export"   ajax="false" />
+            <p:menuitem value="Import"  ajax="false" /> 
+        </p:submenu>
+        
+         <p:separator />
+         
+          <p:submenu label="Gestion des utilisateurs">
+            <p:menuitem value="Consulter les utilisateurs" actionListener=""  ajax="false" />
+            <p:menuitem value="Ajouter un utilisateur" actionListener=""  ajax="false" /> 
+        </p:submenu>
+    </p:panelMenu>
+	
+	
+	</h:form>
+</ui:composition>

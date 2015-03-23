@@ -1,0 +1,25 @@
+package com.tunisiana.lcm.DAOImp;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.tunisiana.lcm.dao.LcmLnkStateParameterDAO;
+import com.tunisiana.lcm.entities.LcmLnkStateParameterEntity;
+
+
+
+public class LcmLnkStateParameterDAOImp implements LcmLnkStateParameterDAO{
+	
+	@PersistenceContext(unitName="lcmPersistenceUnit")
+	EntityManager em;
+
+	@Override
+	public LcmLnkStateParameterEntity getLnkStateParam() {
+		
+		LcmLnkStateParameterEntityPk pk=new LcmLnkStateParameterEntityPk("REAL_SERIVCE_STATUS","INITIALE", 888);
+    	
+		em.find(LcmLnkStateParameterEntity.class, pk);
+		return null;
+	}
+
+}

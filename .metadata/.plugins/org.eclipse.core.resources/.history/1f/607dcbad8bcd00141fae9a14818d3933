@@ -1,0 +1,20 @@
+package com.tunisiana.lcm.DAOImp;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.tunisiana.lcm.dao.LcmContextHistoryDAO;
+import com.tunisiana.lcm.entities.LcmContextHistory;
+
+public class LcmContextHistoryDAOImp implements LcmContextHistoryDAO {
+	
+	@PersistenceContext(unitName="lcmPersistenceUnit")
+	EntityManager em;
+
+	@Override
+	public LcmContextHistory getLcmContextHistory() {
+		
+		return em.find(LcmContextHistory.class, (long)4186985);
+	}
+
+}

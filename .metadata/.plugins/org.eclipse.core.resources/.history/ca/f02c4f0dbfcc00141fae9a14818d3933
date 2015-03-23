@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+    <body>
+	    <ui:composition>
+ 
+		<h1>This is default content</h1>
+		
+    
+  
+    <h:form> 
+        <p:tieredMenu style="width:200px">
+        <p:submenu label="Suivi des abonnés" >
+            <p:menuitem value="Liste des abonnés"  />
+            <p:menuitem value="Rapports des abonnés"  />
+        </p:submenu>
+        <p:submenu label="Suivi des services">
+            <p:menuitem value="Liste des services"  />
+            <p:menuitem value="Rapports des services"  />
+        </p:submenu>
+          <p:submenu label="Suivi des jobs">
+          </p:submenu>
+        <p:separator />
+        
+    </p:tieredMenu>
+    
+    </h:form>
+    
+	    </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+/* #header {
+	color: #EEECE1;
+	width: 980px;
+	margin: auto;
+	padding-top: 5px;
+	width: 980px;
+} */
+
+h1 {
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+	height: 55px;
+	width: 1670px;
+	margin: auto;
+	padding-top: 5px;
+	background-color: #EEECE1;
+	color: #c00000;
+	font-size: xx-large;
+	font-family: Arial, sans-serif;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+h2 {
+	float: right;
+	height: 1px;
+	margin-top: 18px;
+	width: 1670px;
+	background-color: #c00000;
+	color: #FAC090;
+}

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="preactionForm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout Preaction" toggleable="true"
+				toggleSpeed="1000">
+				<p:panelGrid columns="2" id="panelPreaction">
+					<p:remoteCommand name="renderredAction" update="panelPreaction" />
+					<p:outputLabel value=" Choisir la preaction du service: " />
+					<br></br>
+					<p:selectOneMenu value="#{lcmPreactionBean.action_name}"
+						onchange="renderredAction()">
+						<f:selectItem itemLabel="CHARGING_FEE_ACTION_V2" itemValue="1" />
+						<f:selectItem itemLabel="IN_ACTIVATE_PACKAGE_PRE_ACTION"
+							itemValue="2" />
+						<f:selectItem itemLabel="VOMS_WS_ACTION" itemValue="3" />
+					</p:selectOneMenu>
+
+					<p:separator id="customSeparator1" style="width:0px;height:0px" />
+
+					<p:panelGrid columns="2" id="CHARGING_FEE_ACTION_V2"
+						widgetVar="CHARGING_FEE_ACTION_V2"
+						rendered="#{lcmPreactionBean.action_name == 1}">
+						<f:facet name="header"> CHARGING_FEE_ACTION_V2
+						</f:facet>
+						<p:outputLabel for="code" value="Code RTCG : " />
+						<p:inputText id="code" value="#{lcmPreactionBean.parameterA}"
+							>
+						</p:inputText>
+						<p:outputLabel for="type" value="Type Service :" />
+						<p:inputText id="type" value="#{lcmPreactionBean.parameterB}"
+							>
+						</p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid columns="2" id="IN_ACTIVATE_PACKAGE_PRE_ACTION"
+						widgetVar="IN_ACTIVATE_PACKAGE_PRE_ACTION"
+						rendered="#{lcmPreactionBean.action_name == 2}">
+						<f:facet name="header"> IN_ACTIVATE_PACKAGE_PRE_ACTION
+						</f:facet>
+						<p:outputLabel for="nom" value="Nom du package à activer : " />
+						<p:inputText id="nom" value="#{lcmPreactionBean.parameterA}"
+							>
+						</p:inputText>
+						<p:outputLabel for="mode" value="Mode Recharge : " />
+						<p:inputText id="mode" value="#{lcmPreactionBean.parameterB}"
+							>
+						</p:inputText>
+					</p:panelGrid>
+				</p:panelGrid>
+			</p:panel>
+
+			<p:commandButton value="enregistrer" ajax="false"
+				actionListener="#{lcmPreactionBean.addPreactionService}" immediate="true"/>
+			<p:panel>
+				<p:commandButton value="Liste des services" update="preactionForm"
+					actionListener="#{lcmServicebean.backListeService}" immediate="true" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

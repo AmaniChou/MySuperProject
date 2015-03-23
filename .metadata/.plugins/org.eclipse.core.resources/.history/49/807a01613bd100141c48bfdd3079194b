@@ -1,0 +1,5 @@
+package com.oreedoo.lcm.reporting.managedbeans;
+
+public class LoginMBean {
+
+}

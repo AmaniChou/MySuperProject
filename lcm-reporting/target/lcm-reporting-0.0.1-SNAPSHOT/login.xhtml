@@ -1,0 +1,25 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/LoginContent.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="LoginContent">
+		<h:form>
+			<p:panel name="">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Login :" for="login" />
+					<p:inputText value="#{loginMBean.login}" id="login" />
+					<h:outputLabel value="Pass :" for="pass" />
+					<p:inputText value="#{loginMBean.pass}" id="pass" />
+				</h:panelGrid>
+				<p:button value="se connecter" align="center"
+					action="#{loginMBean.connexion}"/>
+				
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

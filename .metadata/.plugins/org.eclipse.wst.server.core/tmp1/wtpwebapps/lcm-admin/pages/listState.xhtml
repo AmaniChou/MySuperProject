@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="stateForm">
+
+			<p:remoteCommand name="test" update="statesTable"></p:remoteCommand>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel id="searchPanel" header="RECHERCHE">
+				<p:panelGrid columns="4" style="width:100%">
+					<p:outputLabel for="name" value="Nom de l'état : " />
+					<p:inputText id="name" value="#{lcmStateBean.stateName}">
+						<p:ajax listener="#{lcmStateBean.updateList}" />
+					</p:inputText>
+				</p:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton id="seekState" value="Rechercher"
+						update="panelResult" actionListener="#{lcmStateBean.searchState}"
+						ajax="true" icon="ui-icon-search" />
+					<p:commandButton id="reset" value="Annuler"
+						update="searchPanel,panelResult"
+						actionListener="#{lcmStateBean.resetSearch}" ajax="true"
+						icon="ui-icon-closethick" />
+				</f:facet>
+			</p:panel>
+
+			<p:panel header="Liste des Etats" toggleable="true"
+				toggleSpeed="1000" visible="#{lcmStateBean.boutonState}"
+				id="panelResult">
+				<p:dataTable var="stateTAB" value="#{lcmStateBean.listStates}"
+					paginator="true" widgetVar="stateTable" id="statesTable"
+					rowKey="#{LifeCycleStateEntity.stateName}"
+					filteredValue="#{lcmStateBean.filtredState}"
+					rowsPerPageTemplate="5,10,15" rows="5">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="recherche :  " />
+							<p:inputText id="globalFilter" onkeyup="stateTable.filter()"
+								style="width:150px" />
+						</p:outputPanel>
+					</f:facet>
+					<p:column headerText="NOM ETAT" filterBy="#{stateTAB.stateName}"
+						>
+						<h:outputText value="#{stateTAB.stateName}" />
+					</p:column>
+					<p:column headerText="DESCRIPTION">
+						<h:outputText value="#{stateTAB.description}" />
+					</p:column>
+					<p:column headerText="TYPE Etat" filterBy="#{stateTAB.stateType}">
+						<p:outputLabel value="#{stateTAB.stateType}" />
+					</p:column>
+					<p:column headerText="Editer">
+						<center>
+							<p:commandButton icon="ui-icon-pencil" type="submit"
+								styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+								actionListener="#{lcmStateBean.goToEditState(stateTAB)}" />
+						</center>
+					</p:column>
+					<p:column headerText="Supprimer">
+						<center>
+							<p:commandButton icon="ui-icon-trash"
+								styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+								actionListener="#{lcmStateBean.removeSate(stateTAB)}"
+								 update="statesTable"/>
+						</center>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

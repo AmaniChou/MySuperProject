@@ -1,0 +1,507 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<title>EDIT</title>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/jsPlumb.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/configLCM.js">
+		
+	</script>
+		<h:outputStylesheet library="css" name="design.css" />
+
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+		<p:layoutUnit position="north" size="123" resizable="false"
+			closable="false" collapsible="false">
+			<h:form>
+			
+				<table>
+					<tr>
+						<td align="left"><h:outputLink
+								value="http://www.ooredoo.com/" title="Ooredoo">
+								<div class="logoOoredooHorizontal" />
+							</h:outputLink></td>
+						<td align="center"><h:outputLink>
+								<div class="lCMAdmin" />
+							</h:outputLink></td>
+						<td align="right" class="userInfo"><h:outputLink
+								value="/lcm-admin/pages/home.jsf" title="Acceuil" icon="home" styleClass="icon1">
+								<h:outputText value="Acceuil"></h:outputText>
+							</h:outputLink> <h:outputLink value="/lcm-admin/pages/login.jsf"
+							title="Deconnexion" icon="ui-icon-power" styleClass="icon2">
+								<h:outputText value="Deconnexion"></h:outputText>
+							</h:outputLink></td>
+
+					</tr>
+				</table>
+
+			</h:form>
+
+
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="300" header="Menu principal"
+			resizable="false" closable="fasle" collapsible="false">
+
+			<p:panel header="Menu">
+				<h:form>
+
+					<p:growl id="messages" autoUpdate="true" />
+					<p:panelMenu style="width:150px">
+						<p:submenu label="Gestion des Services"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les services"
+								outcome="/pages/listService" />
+							<p:menuitem value="Configurer un nouveau service"
+								outcome="/pages/addParameterService" />
+						</p:submenu>
+						<p:submenu label="Gestion des Etats"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les Etats" ajax="false"
+								outcome="/pages/listState" />
+							<p:menuitem value="Ajouter un Etat" ajax="false"
+								outcome="/pages/addState" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Gestion des Actions"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les Actions" ajax="false"
+								outcome="/pages/listAction" />
+							<p:menuitem value="Ajouter une Action" ajax="false"
+								outcome="/pages/addAction" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Simulation" style="width:150px;font-size:12px ;">
+							<p:menuitem value="Simuler le cycle de vie d'un service"
+								ajax="false" />
+							<p:menuitem value="Valider la configuration dun service"
+								ajax="false" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Migration" style="width:150px;font-size:12px ;">
+							<p:menuitem value="EXPORT" ajax="false" />
+							<p:menuitem value="IMPORT" ajax="false" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Gestion des utilisateurs"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les utilisateurs" ajax="false"
+								outcome="/pages/listUsersAdmin" />
+							<p:menuitem value="Ajouter un utilisateur" ajax="false"
+								outcome="/pages/addUser" />
+						</p:submenu>
+
+					</p:panelMenu>
+
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+
+
+
+
+
+
+
+		<p:layoutUnit id="serviceEdit" position="center">
+		
+		
+			<h:form id="serviceForm">
+
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<p:panel header="Ajout service" toggleable="true" toggleSpeed="1000"
+					id="panelService">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="SNCODE " />
+						<p:inputText value="#{lcmServicebean.selectedService.sncode}"
+							id="sncode" required="true"
+							requiredMessage="Vous devez saisir un sncode positif !" />
+
+						<h:outputLabel value="Nom Service : " />
+						<p:inputText value="#{lcmServicebean.selectedService.name}"
+							id="nom" required="true"
+							requiredMessage="Vous devez saisir le nom du service !" />
+
+						<h:outputText value="Birthday Flag: " />
+						<p:selectOneRadio id="flag"
+							value="#{lcmServicebean.selectedService.birthDayFlag}">
+							<f:selectItem itemLabel="true" itemValue="true" />
+							<f:selectItem itemLabel="false" itemValue="false" />
+						</p:selectOneRadio>
+
+						<h:outputLabel value="Strategie de la date d'activation: " />
+						<p:selectOneMenu
+							value="#{lcmServicebean.selectedService.activationDateStrategy}">
+							<f:selectItem itemLabel="DATE_TO_DATE" itemValue="DATE_TO_DATE" />
+							<f:selectItem itemLabel="MONTH_TRUNCATE"
+								itemValue="MONTH_TRUNCATE" />
+							<f:selectItem itemLabel="DAY_TRUNCATE" itemValue="DAY_TRUNCATE" />
+							<f:selectItem itemLabel="HOUR_TRUNCATE" itemValue="HOUR_TRUNCATE" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="enregistrer"
+							actionListener="#{lcmServicebean.editServiceBaseParameter}"
+							ajax="true" />
+						<p:commandButton value="annuler" update="serviceForm"
+							actionListener="#{lcmServicebean.annuler}" />
+					</h:panelGrid>
+
+				</p:panel>
+				<p:separator id="customSeparator1" style="width:1000px;height:10px" />
+				<p:panel>
+					<p:commandButton value="Liste des services" update="serviceForm"
+						actionListener="#{lcmServicebean.backListeService}" />
+				</p:panel>
+			</h:form>
+		
+			<p:separator id="customSeparator1" style="width:1000px;height:10px" />
+		
+			<p:accordionPanel>
+				<p:tab title="Cycle de vie du service">
+					<h:outputStylesheet library="css" name="jsPlumbStyle.css" />
+					<div id="Palette">
+						<div class="window" id="1"></div>
+						<div class="window" id="2"></div>
+						<div class="window" id="3"></div>
+					</div>
+
+					<div id="lifeCycleChart">
+						
+						  <!--  <p:panel style="color:red">
+							<button onclick="setCycle_Config()">Sauvegarder la cycle
+								de vie</button>
+						</p:panel>-->
+					</div>
+
+					<p:dialog id="stateInitDlg" header="Paramètres d'état"
+						widgetVar="stateInitDlg" modal="true" appendToBody="true"
+						resizable="true" height="330" onHide="checkStateParam()">
+						<h:form>
+							<p:panelGrid id="stateParametersInitGrid"
+								WidgetVar="stateParametersInitGrid" columns="4">
+								<h:outputLabel for="stateName" value="Nom d'état : " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.parameters_State.stateName}"
+									id="stateName" widgetVar="stateName">
+
+									<f:selectItems value="#{lcmLifeCycle.listStates}">
+									</f:selectItems>
+								</p:selectOneMenu>
+								<p:separator id="customSeparator1" style="width:0px;height:0px" />
+								<p:separator id="customSeparator2" style="width:0px;height:0px" />
+								<h:outputLabel for="stateRealStatus" value="Période : " />
+								<h:outputLabel for="stateMonths" value="Mois" />
+								<p:selectOneMenu id="monthSignal"
+									value="#{lcmLifeCycle.parameters_State.monthSignal}">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner value="#{lcmLifeCycle.parameters_State.months}"
+									id="stateMonths" min="0" max="12" />
+								<p:separator id="customSeparator3" style="width:0px;height:0px" />
+								<h:outputLabel for="stateDays" value="Jours" />
+								<p:selectOneMenu id="daySignal"
+									value="#{lcmLifeCycle.parameters_State.daySignal}">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner value="#{lcmLifeCycle.parameters_State.days}"
+									id="stateDays" min="0" max="31" />
+								<p:separator id="customSeparator4" style="width:0px;height:0px" />
+								<h:outputLabel for="stateHours" value="Heures" />
+								<p:selectOneMenu id="hourSignal"
+									value="#{lcmLifeCycle.parameters_State.hourSignal}">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner value="#{lcmLifeCycle.parameters_State.hours}"
+									id="stateHours" min="0" max="24" />
+								<h:outputLabel for="stateRealStatus"
+									value="Etat Réel de l'état : " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.parameters_State.stateRealStatus}"
+									id="stateRealStatus">
+									<f:selectItem itemLabel="Actif" itemValue="ACTIVE" />
+									<f:selectItem itemLabel="En période de grâce" itemValue="grace" />
+									<f:selectItem itemLabel="Désactivé" itemValue="DIACTIVATED" />
+								</p:selectOneMenu>
+								<p:separator id="customSeparator5" style="width:0px;height:0px" />
+								<p:separator id="customSeparator6" style="width:0px;height:0px" />
+								<h:outputLabel for="stateRecDet"
+									value="Activer le Recharge Detector : " />
+								<p:selectOneMenu id="stateRecDet"
+									value="#{lcmLifeCycle.parameters_State.rechargeDetector}">
+									<f:selectItem itemLabel="Oui" itemValue="true" />
+									<f:selectItem itemLabel="Non" itemValue="false" />
+								</p:selectOneMenu>
+								<p:separator id="customSeparator7" style="width:0px;height:0px" />
+								<p:separator id="customSeparator8" style="width:0px;height:0px" />
+								<f:facet name="footer">
+									<p:commandButton id="stateParamButton" value="Confirmer"
+										oncomplete="initStateParameters(xhr, status, args)"
+										actionListener="#{lcmLifeCycle.getParameters_State}"
+										icon="ui-icon-check" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</p:dialog>
+
+
+					<p:dialog id="stateEditDlg" header="Paramètres d'état"
+						widgetVar="stateEditDlg" modal="true" appendToBody="true"
+						resizable="true" height="330">
+						<h:form id="stateParamForm">
+							<p:remoteCommand name="clickedStateRemoteCmd"
+								action="#{lcmLifeCycle.editState}" update="stateParamForm" />
+							<p:panelGrid id="stateParametersEditGrid"
+								WidgetVar="stateParametersEditGrid" columns="4">
+								<h:outputLabel for="stateName" value="Nom d'état : " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.stateParameters.stateName}"
+									id="editedStateName" widgetVar="editedStateName"
+									style="width:200px">
+									<f:selectItem itemLabel="#{lcmLifeCycle.selectedStateName}"
+										itemValue="#{lcmLifeCycle.selectedStateName}" />
+									<f:selectItems value="#{lcmLifeCycle.listStates}">
+									</f:selectItems>
+								</p:selectOneMenu>
+								<p:separator id="customSeparator1" style="width:0px;height:0px" />
+								<p:separator id="customSeparator2" style="width:0px;height:0px" />
+								<h:outputLabel for="stateRealStatus" value="Période : " />
+								<h:outputLabel for="stateMonths" value="Mois" />
+								<p:selectOneMenu id="editedMonthSignal"
+									widgetVar="editedMonthSignal"
+									value="#{lcmLifeCycle.stateParameters.monthSignal}"
+									style="width:50px">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner id="selectedMonthValue"
+									value="#{lcmLifeCycle.stateParameters.months}" min="0" max="12" />
+								<p:separator id="customSeparator3" style="width:0px;height:0px" />
+								<h:outputLabel for="stateDays" value="Jours" />
+								<p:selectOneMenu id="editedDaySignal"
+									widgetVar="editedDaySignal"
+									value="#{lcmLifeCycle.stateParameters.daySignal}"
+									style="width:50px">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner value="#{lcmLifeCycle.stateParameters.days}" min="0"
+									max="31" id="editedStateDays" />
+								<p:separator id="customSeparator4" style="width:0px;height:0px" />
+								<h:outputLabel for="stateHours" value="Heures" />
+								<p:selectOneMenu id="editedHourSignal"
+									widgetVar="editedHourSignal"
+									value="#{lcmLifeCycle.stateParameters.hourSignal}"
+									style="width:50px">
+									<f:selectItem itemLabel="+" itemValue="+" />
+									<f:selectItem itemLabel="-" itemValue="-" />
+								</p:selectOneMenu>
+								<p:spinner value="#{lcmLifeCycle.stateParameters.hours}"
+									id="editedStateHours" min="0" max="24" />
+								<h:outputLabel for="stateRecDet" value="Recharge Detector : " />
+								<p:selectOneMenu id="editedRechargeDetector"
+									widgetVar="editedRechargeDetector"
+									value="#{lcmLifeCycle.stateParameters.rechargeDetector}"
+									style="width:100px">
+									<f:selectItem itemLabel="Oui" itemValue="true" />
+									<f:selectItem itemLabel="Non" itemValue="false" />
+								</p:selectOneMenu>
+								<p:separator id="customSeparator5" style="width:0px;height:0px" />
+								<p:separator id="customSeparator6" style="width:0px;height:0px" />
+								<h:outputLabel for="stateRealStatus" value="Etat Réel : " />
+								<p:selectOneMenu id="editedRealStatus"
+									widgetVar="editedRealStatus"
+									value="#{lcmLifeCycle.stateParameters.stateRealStatus}"
+									style="width:250px">
+									<f:selectItem itemLabel="Actif" itemValue="ACTIVE" />
+									<f:selectItem itemLabel="En période de grâce" itemValue="grace" />
+									<f:selectItem itemLabel="Désactivé" itemValue="DIACTIVATED" />
+								</p:selectOneMenu>
+								<p:separator id="customSeparator7" style="width:0px;height:0px" />
+								<p:separator id="customSeparator8" style="width:0px;height:0px" />
+								<f:facet name="footer">
+									<p:commandButton id="stateParamButton" value="Confirmer"
+										oncomplete="editStateParameters(xhr, status, args)"
+										actionListener="#{lcmLifeCycle.updateState_Parameters}"
+										icon="ui-icon-check" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</p:dialog>
+
+
+					<p:dialog id="transitionInitDlg"
+						header="Paramètres de la transition" widgetVar="transitionInitDlg"
+						modal="true" appendToBody="true" resizable="true">
+						<h:form id="test">
+							<p:remoteCommand name="updateInitFlag"
+								update="transitionInitGrid" />
+							<p:remoteCommand name="updateInitPostActionFields"
+								update="transitionInitGrid" />
+
+							<p:panelGrid id="transitionInitGrid"
+								widgetVar="transitionInitGrid" columns="2" style="width:100%">
+								<h:outputLabel for="transitionName" value="Nom Evènement : " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.transitionParameters.eventName}"
+									id="transitionName">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItems value="#{lcmLifeCycle.listEvent}">
+									</f:selectItems>
+								</p:selectOneMenu>
+
+								<h:outputLabel for="doPreAction" value="doPréaction : " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.transitionParameters.doPreAction}"
+									onchange="updateInitFlag()" id="doPreAction">
+									<f:selectItem itemLabel="Non" itemValue="false" />
+									<f:selectItem itemLabel="Oui" itemValue="true" />
+								</p:selectOneMenu>
+								<p:outputLabel for="transitionFlag" value="Target Type"
+									id="transitionFlagOut"
+									rendered="#{lcmLifeCycle.transitionParameters.doPreAction == true}" />
+
+								<p:selectOneMenu id="transitionFlag" widgetVar="transitionFlag"
+									value="#{lcmLifeCycle.transitionParameters.transitionFlag}"
+									rendered="#{lcmLifeCycle.transitionParameters.doPreAction == true}">
+									<f:selectItem itemLabel="TargetOK" itemValue="Ok" />
+									<f:selectItem itemLabel="TargerKo" itemValue="Ko" />
+								</p:selectOneMenu>
+
+								<h:outputLabel for="postAction" value="Post-action: " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.transitionParameters.postAction}"
+									onchange="updateInitPostActionFields()" id="postAction">
+									<f:selectItem itemLabel="Pas de postAction" itemValue="0" />
+									<f:selectItem itemLabel="Activation IN" itemValue="1" />
+									<f:selectItem itemLabel="Envoi SMS" itemValue="2" />
+									<f:selectItem itemLabel="Désactivation BSCS" itemValue="3" />
+								</p:selectOneMenu>
+								<p:separator id="customSeparator15" style="width:0px;height:0px" />
+								<p:panelGrid columns="2" id="postActivationIN"
+									widgetVar="postActivationIN"
+									rendered="#{lcmLifeCycle.transitionParameters.postAction == 1}">
+									<f:facet name="header">ACTIVATION IN</f:facet>
+									<h:outputLabel for="postpN" value="Nom du package  : " />
+									<p:selectOneMenu id="postpN"
+										value="#{lcmLifeCycle.transitionParameters.packageName}">
+										<f:selectItem itemLabel="FB_Grace" itemValue="FB_Grace" />
+									</p:selectOneMenu>
+
+									<h:outputLabel for="postcM" value="Mode de recharge :" />
+									<p:selectOneMenu id="postcM"
+										value="#{lcmLifeCycle.transitionParameters.chargeMode}">
+										<f:selectItem itemLabel="Gratuit" itemValue="0" />
+										<f:selectItem itemLabel="Payant" itemValue="1" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+								<p:panelGrid columns="2" id="postSendSMSParam"
+									widgetVar="postSendSMSParam"
+									rendered="#{lcmLifeCycle.transitionParameters.postAction == 2}">
+									<f:facet name="header">ENVOI SMS</f:facet>
+									<h:outputLabel for="postprocessName" value="Nom du process  : " />
+									<p:selectOneMenu id="postprocessName"
+										value="#{lcmLifeCycle.transitionParameters.processName}">
+										<f:selectItem itemLabel="ManualDeactivation"
+											itemValue="ManualDeactivation" />
+										<f:selectItem itemLabel="Debit" itemValue="Debit" />
+										<f:selectItem itemLabel="Expiration" itemValue="Expiration" />
+										<f:selectItem itemLabel="Activation" itemValue="Activation" />
+										<f:selectItem itemLabel="FirstDebitOk"
+											itemValue="FirstDebitOk" />
+										<f:selectItem itemLabel="FirstDebitKo"
+											itemValue="FirstDebitKo" />
+										<f:selectItem itemLabel="Rappel" itemValue="Rappel" />
+										<f:selectItem itemLabel="AutomaticDeactivation"
+											itemValue="	AutomaticDeactivation" />
+
+									</p:selectOneMenu>
+									<!--  <p:inputText id="postprocessName"
+										value="#{lcmLifeCycle.transitionParameters.processName}">
+									</p:inputText>-->
+								</p:panelGrid>
+								<p:panelGrid columns="2" id="postDiactivationBSCSParam"
+									widgetVar="postDiactivationBSCSParam"
+									rendered="#{lcmLifeCycle.transitionParameters.postAction == 3}">
+									<f:facet name="header">DESACTIVATION BSCS</f:facet>
+									<h:outputLabel for="postUrl" value="Url  : " />
+									<p:selectOneMenu id="postUrl"
+										value="#{lcmLifeCycle.transitionParameters.webServiceUrl}">
+										<f:selectItem itemLabel="webServiceUrl"
+											itemValue="webServiceUrl" />
+									</p:selectOneMenu>
+									<h:outputLabel for="postLogin" value="Nom d'utilisateur :" />
+									<p:selectOneMenu id="postLogin"
+										value="#{lcmLifeCycle.transitionParameters.webServiceLogin}">
+										<f:selectItem itemLabel="webServiceLogin"
+											itemValue="webServiceLogin" />
+									</p:selectOneMenu>
+									<h:outputLabel for="postPassword" value="Mot de passe:" />
+									<p:selectOneMenu id="postPassword"
+										value="#{lcmLifeCycle.transitionParameters.webServicePassword}">
+										<f:selectItem itemLabel="webServicePassword"
+											itemValue="webServicePassword" />
+									</p:selectOneMenu>
+								</p:panelGrid>
+
+								<f:facet name="footer">
+									<p:commandButton id="transitionParams" value="Confirmer"
+										oncomplete="initTransitionParameters(xhr, status, args)"
+										actionListener="#{lcmLifeCycle.getParameter_transition}"
+										icon="ui-icon-check" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</p:dialog>
+					<h:form>
+
+						<p:remoteCommand name="saveLifeCycleRemoteCmd"
+							action="#{lcmServicebean.changLifeCycle}" />
+						<p:commandButton id="editService" value="Enregistrer"
+							onstart="setCycle_Config()"
+							actionListener="#{lcmServicebean.updateServiceCycle}" ajax="true"
+							icon="ui-icon-disk" />
+						<p:commandButton id="resetService" value="Annuler"
+							action="#{serviceMB.resetEdit}" ajax="false"
+							icon="ui-icon-closethick" />
+					</h:form>
+
+				</p:tab>
+
+
+			</p:accordionPanel>
+
+
+
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
+
+<!-- 	<h:outputLabel for="doPreAction" value="doPréaction: " />
+								<p:selectOneMenu
+									value="#{lcmLifeCycle.transitionParameters.doPreAction}"
+									id="doPreAction">
+									<f:selectItem itemLabel="Non" itemValue="false" />
+									<f:selectItem itemLabel="Oui" itemValue="true" />
+								</p:selectOneMenu>
+								<p:outputLabel for="transitionFlag"
+									value="Target Type " id="transitionFlagOut" />
+								<p:selectOneMenu id="transitionFlag" widgetVar="transitionFlag"
+									value="#{lcmLifeCycle.transitionParameters.transitionFlag}">
+									<f:selectItem itemLabel="TargetOK" itemValue="Ok" />
+									<f:selectItem itemLabel="TargetKo" itemValue="Ko" />
+								</p:selectOneMenu>
+								 -->

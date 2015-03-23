@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans:beans xmlns='http://www.springframework.org/schema/security'
+	xmlns:beans='http://www.springframework.org/schema/beans' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns:context='http://www.springframework.org/schema/context'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd'>
+	<context:component-scan base-package="com.tunisiana.lcm.admin">
+	</context:component-scan>
+	<beans:bean id='userDetailsService'
+		class='com.tunisiana.lcm.admin.security.service.UserDetailsServiceImpl'></beans:bean>
+	<http auto-config="true">
+		<intercept-url pattern="/views/login.xhtml*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**" access="ROLE_SUPERADMIN" />
+		<form-login login-page="/views/login.xhtml"
+			authentication-failure-url="/views/login.xhtml" />
+		<logout logout-url="/j_logout" logout-success-url="/views/login.xhtml" />
+	</http>
+	<beans:bean id='daoAuthenticationProvider'
+		class='org.springframework.security.authentication.dao.DaoAuthenticationProvider'>
+		<beans:property name='userDetailsService' ref='userDetailsService' />
+	</beans:bean>
+	<beans:bean id='authenticationManager'
+		class='org.springframework.security.authentication.ProviderManager'>
+		<beans:property name='providers'>
+			<beans:list>
+				<beans:ref local='daoAuthenticationProvider' />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<authentication-manager>
+		<authentication-provider user-service-ref='userDetailsService'>
+			<password-encoder hash='plaintext' />
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>

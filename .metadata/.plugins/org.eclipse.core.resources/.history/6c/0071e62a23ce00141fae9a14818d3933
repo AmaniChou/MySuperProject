@@ -1,0 +1,9 @@
+package com.oreedoo.lcm.dao;
+
+import com.tunisiana.lcm.entities.LcmLnkStateParameterEntity;
+import com.tunisiana.lcm.entities.LcmLnkStateParameterEntityPK;
+
+public interface LcmLnkStateParameterDAO {
+	
+	LcmLnkStateParameterEntity getLnkStateParam();
+}

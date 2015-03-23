@@ -1,0 +1,138 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<title>Simulation</title>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/jsPlumb.js"></script>
+
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/simulationLCM.js">
+		
+	</script>
+
+	<h:outputStylesheet library="css" name="design.css" />
+
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+		<p:layoutUnit position="north" size="123" resizable="false"
+			closable="false" collapsible="false">
+			<h:form>
+
+				<table>
+					<tr>
+					<!--  <td align="left"><h:outputLink
+								value="http://www.ooredoo.com/" title="Ooredoo">
+								<div class="logoOoredooHorizontal" />
+							</h:outputLink></td>-->	
+						<td align="center"><h:outputLink>
+								<div class="lCMAdmin" />
+							</h:outputLink></td>
+						<td align="right" class="userInfo"><h:outputLink
+								value="/lcm-admin/pages/home.jsf" title="Acceuil" icon="home"
+								styleClass="icon1">
+								<h:outputText value="Acceuil"></h:outputText>
+							</h:outputLink> <h:outputLink value="/lcm-admin/pages/login.jsf"
+								title="Deconnexion" icon="ui-icon-power" styleClass="icon2">
+								<h:outputText value="Deconnexion"></h:outputText>
+							</h:outputLink></td>
+
+					</tr>
+				</table>
+
+			</h:form>
+
+
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="300" header="Menu principal"
+			resizable="false" closable="fasle" collapsible="false">
+
+			<p:panel header="Menu">
+				<h:form>
+
+					<p:growl id="messages" autoUpdate="true" />
+					<p:panelMenu >
+					<p:submenu label="Gestion des Services"
+						>
+						<p:menuitem value="Consulter les services"
+							outcome="/pages/listService" />
+						<p:menuitem value="Configurer un nouveau service"
+							outcome="/pages/addParameterService" />
+					</p:submenu>
+					<p:submenu label="Gestion des Etats"
+						>
+						<p:menuitem value="Consulter les Etats" ajax="false"
+							outcome="/pages/listState" />
+						<p:menuitem value="Ajouter un Etat" ajax="false"
+							outcome="/pages/addState" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Gestion des Actions"
+					>
+						<p:menuitem value="Consulter les Actions" ajax="false"
+							outcome="/pages/listAction" />
+						<p:menuitem value="Ajouter une Action" ajax="false"
+							outcome="/pages/addAction" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Simulation" >
+						<p:menuitem value="Simuler le cycle de vie d'un service"
+							ajax="false" outcome="/pages/simulationServices" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Migration" >
+						<p:menuitem value="EXPORT" ajax="false"
+						outcome="/pages/exportConfiguration" />
+						<p:menuitem value="IMPORT" ajax="false"
+							outcome="/pages/importConfiguration"  />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Gestion des utilisateurs"
+						>
+						<p:menuitem value="Consulter les utilisateurs" ajax="false"
+							outcome="/pages/listUsersAdmin" />
+						<p:menuitem value="Ajouter un utilisateur" ajax="false"
+							outcome="/pages/addUser" />
+					</p:submenu>
+
+				</p:panelMenu>
+
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="serviceSimulation" position="center">
+			<h:form>
+				<p:panel>
+					<p:commandButton value="Paramètres Simualtion"
+						actionListener="#{lcmServiceSimulationBean.backSimulationParameters()}" />
+				</p:panel>
+			</h:form>
+
+			<p:separator id="customSeparator1" style="width:1000px;height:10px" />
+
+			<p:accordionPanel>
+			
+				<p:tab title="Simulation du Cycle de vie du service">
+					<h:outputStylesheet library="css" name="jsPlumbStyle.css" />
+					
+
+					<div id="lifeCycleChart"></div>
+
+
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
+

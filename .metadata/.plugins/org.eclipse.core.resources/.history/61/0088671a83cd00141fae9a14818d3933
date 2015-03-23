@@ -1,0 +1,147 @@
+package com.tunisiana.lcm.entities;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+@Entity
+@Table(name="LCM_CONTEXT_HISTORY")
+public class LcmContextHistory {
+	
+
+	@Id
+	@Column(name="ID")
+	Long id;
+	
+	@Column(name = "VERSION")
+	Long version;
+	
+	@Column(name = "ENTRY_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date entry_date;
+	
+	@Column(name="STATE")
+	String state;
+	
+	@Column(name="MSISDN")
+	String msisdn ;
+	
+	@Column(name="SNCODE")
+	int sncode;
+	
+	@Column(name = "CREATION_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creation_date;
+
+	@Column(name="DESCRIPTION")
+	String description ;
+	
+	@Column(name="COUNTER_VALUE",nullable="TRUE")
+	int counter_value;
+	
+	@Column(name="EVENT_NAME")
+	String event_name ;
+	
+	@Column(name = "TIMER_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timer_date;
+
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public Date getEntry_date() {
+		return entry_date;
+	}
+
+	public void setEntry_date(Date entry_date) {
+		this.entry_date = entry_date;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getMsisdn() {
+		return msisdn;
+	}
+
+	public void setMsisdn(String msisdn) {
+		this.msisdn = msisdn;
+	}
+
+	public int getSncode() {
+		return sncode;
+	}
+
+	public void setSncode(int sncode) {
+		this.sncode = sncode;
+	}
+
+	public Date getCreation_date() {
+		return creation_date;
+	}
+
+	public void setCreation_date(Date creation_date) {
+		this.creation_date = creation_date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getCounter_value() {
+		return counter_value;
+	}
+
+	public void setCounter_value(int counter_value) {
+		this.counter_value = counter_value;
+	}
+
+	public String getEvent_name() {
+		return event_name;
+	}
+
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
+	}
+
+	public Date getTimer_date() {
+		return timer_date;
+	}
+
+	public void setTimer_date(Date timer_date) {
+		this.timer_date = timer_date;
+	}
+	
+	
+	
+}

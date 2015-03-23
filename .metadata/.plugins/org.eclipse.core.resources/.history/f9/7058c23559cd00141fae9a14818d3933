@@ -1,0 +1,13 @@
+
+ 
+    	<ui:composition 
+    	xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    	template="/template/LoginContent.xhtml">
+    	<ui:define name="LoginContent">
+    	It worrrrrrrrks !!!
+    	</ui:define>
+    	</ui:composition>
+ 
+ 

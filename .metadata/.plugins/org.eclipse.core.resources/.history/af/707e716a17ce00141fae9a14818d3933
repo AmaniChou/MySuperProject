@@ -1,0 +1,83 @@
+package com.tunisiana.lcm.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "LCM_LNK_STATE_PARAMETER")
+@IdClass(LcmLnkStateParameterEntityPK.class)
+public class LcmLnkStateParameterEntity implements Serializable {
+
+   
+   @Id
+   @Column(name="ID_STATE_PARAMETER")
+	String id_state_parameter;
+	
+   @Id
+	@Column(name="ID_STATE")
+	String id_state ;
+	
+   @Id
+	@Column(name="SNCODE")
+	long sncode;
+
+	
+	@Column(name="VERSION")
+	long version;
+	
+	@Column(name="VALUE")
+	String value;
+
+	public LcmLnkStateParameterEntity() {
+		super();
+	}
+
+	public String getId_state_parameter() {
+		return id_state_parameter;
+	}
+
+	public void setId_state_parameter(String id_state_parameter) {
+		this.id_state_parameter = id_state_parameter;
+	}
+
+	public String getId_state() {
+		return id_state;
+	}
+
+	public void setId_state(String id_state) {
+		this.id_state = id_state;
+	}
+
+	public long getSncode() {
+		return sncode;
+	}
+
+	public void setSncode(long sncode) {
+		this.sncode = sncode;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	
+	
+}

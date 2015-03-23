@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Tue Mar 17 16:26:21 CET 2015
+org.eclipse.jst.j2ee.server\:lcm-business=WEB-INF/lib/lcm-business-3.1.jar
+org.eclipse.jst.j2ee.server\:lcm-commons=WEB-INF/lib/lcm-commons-3.1.jar
+org.eclipse.jst.j2ee.server\:lcm-bpm=WEB-INF/lib/lcm-bpm-3.1.jar

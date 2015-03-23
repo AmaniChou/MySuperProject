@@ -1,0 +1,86 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/loginTemplate.xhtml">
+
+	<ui:define name="header">
+
+		<h:form>
+			<!--  
+			<table width="100%">
+				<tr>
+					<td align="left"><h:outputLink value="http://www.ooredoo.com/"
+							title="Ooredoo">
+							<div class="logoOoredooHorizontal" />
+						</h:outputLink></td>
+				
+					
+				</tr>
+			</table>
+
+-->
+			<table width="100%">
+				<td align="left"><h:outputLink>
+						<div class="lCMAdmin" />
+					</h:outputLink></td>
+			</table>
+			<p:separator id="customSeparator1" style="width:2000px;height:10px" />
+
+
+		</h:form>
+
+
+	</ui:define>
+
+	<ui:define name="content3">
+		<div
+			style="margin-top: 100px; margin-bottom: 100px; margin-left: auto; margin-right: auto; padding: 20px; width: 450px; height: :">
+
+			<h:form id="loginForm" prependId="false">
+				<p:panel id="panel" header="Veuillez vous identifier" icon="lock"
+					style="backgroud:grey;">
+
+					<h:panelGrid columns="2">
+
+						<h:outputLabel for="username" value="Nom d'utilisateur :  " />
+						<p:inputText required="true"
+							requiredMessage="Veuillez saisir votre nom d'utilisateur"
+							label="username" value="#{loginSecurityBean.username}"
+							id="username" />
+
+						<p:spacer />
+
+						<h:message for="username" display="text" style="color:red" />
+
+
+						<h:outputLabel for="password" value="Mot de passe :  " />
+						<p:password label="password" required="true"
+							requiredMessage="Veuillez saisir votre mot de passe"
+							value="#{loginSecurityBean.password}" id="password" />
+
+
+						<p:spacer />
+
+						<h:message for="password" display="text" style="color:red" />
+
+
+						<f:facet name="footer">
+							<p:commandButton icon="ui-icon-refresh" value="Connexion"
+								actionListener="#{loginSecurityBean.doLogin}"
+								update="loginPanelId" ajax="false" />
+							<p:commandButton value="Annuler" type="reset"
+								icon="ui-icon-cancel" />
+						</f:facet>
+
+					</h:panelGrid>
+
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+
+
+</ui:composition>

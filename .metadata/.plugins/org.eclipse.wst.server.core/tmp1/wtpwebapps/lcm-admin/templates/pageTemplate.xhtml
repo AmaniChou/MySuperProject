@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/common/commonLayout.xhtml">
+
+	<ui:define name="header">
+		<h:form>
+			<table >
+				<tr>
+				<!-- 
+					<td align="left"><h:outputLink value="http://www.ooredoo.com/"
+							title="Ooredoo">
+							<div class="logoOoredooHorizontal" />
+						</h:outputLink></td>
+						 -->
+					<td align="left"><h:outputLink >
+							<div class="lCMAdmin" />
+						</h:outputLink></td>
+					<td align="right" class="userInfo"><h:outputLink
+							value="/lcm-admin/pages/home.jsf" title="Acceuil" icon="home" styleClass="icon1">
+							<h:outputText value="Acceuil"></h:outputText>
+						</h:outputLink> <h:outputLink value="/lcm-admin/pages/login.jsf"
+							title="Deconnexion" icon="ui-icon-power" styleClass="icon2">
+							<h:outputText value="Deconnexion"></h:outputText>
+						</h:outputLink></td>
+				</tr>
+			</table>
+		</h:form>
+	</ui:define>
+
+
+	<ui:define name="content">
+		<p:panel header="Menu" style="font-family: 20px;" >
+			<h:form>
+
+				<p:growl id="messages" autoUpdate="true" />
+				<p:panelMenu >
+					<p:submenu label="Gestion des Services"
+						style="width:200px;">
+						<p:menuitem value="Consulter les services"
+							outcome="/pages/listService" />
+						<p:menuitem value="Configurer un nouveau service"
+							outcome="/pages/addParameterService" />
+					</p:submenu>
+					<p:submenu label="Gestion des Etats"
+						>
+						<p:menuitem value="Consulter les Etats" ajax="false"
+							outcome="/pages/listState" />
+						<p:menuitem value="Ajouter un Etat" ajax="false"
+							outcome="/pages/addState" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Gestion des Actions"
+					>
+						<p:menuitem value="Consulter les Actions" ajax="false"
+							outcome="/pages/listAction" />
+						<p:menuitem value="Ajouter une Action" ajax="false"
+							outcome="/pages/addAction" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Simulation" >
+						<p:menuitem value="Simuler le cycle de vie d'un service"
+							ajax="false" outcome="/pages/simulationServices" />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Migration" >
+						<p:menuitem value="EXPORT" ajax="false"
+						outcome="/pages/exportConfiguration" />
+						<p:menuitem value="IMPORT" ajax="false"
+							outcome="/pages/importConfiguration"  />
+					</p:submenu>
+					<p:separator />
+					<p:submenu label="Gestion des utilisateurs"
+						>
+						<p:menuitem value="Consulter les utilisateurs" ajax="false"
+							outcome="/pages/listUsersAdmin" />
+						<p:menuitem value="Ajouter un utilisateur" ajax="false"
+							outcome="/pages/addUser" />
+					</p:submenu>
+
+				</p:panelMenu>
+
+			</h:form>
+		</p:panel>
+	</ui:define>
+
+
+ 
+
+	<ui:define name="footer">
+	</ui:define>
+</ui:composition>

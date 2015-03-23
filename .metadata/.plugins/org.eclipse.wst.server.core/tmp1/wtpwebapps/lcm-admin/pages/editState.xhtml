@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="actionForm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout Etat" toggleable="true" toggleSpeed="1000"
+				id="panelaction">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nom Etat : " />
+					<p:inputText value="#{lcmStateBean.selectedState.stateName}"
+						id="nomEtat" required="true"
+						requiredMessage="Vous devez enter le nom de l'état !" />
+
+					<p:outputLabel value="Description : " />
+					<p:inputText value="#{lcmStateBean.selectedState.description}"
+						id="description" />
+
+
+					<p:outputLabel value="Type Etat : " />
+					<p:inputText value="#{lcmStateBean.selectedState.stateType}"
+						id="typeEtat" />
+
+					<p:commandButton value="enregistrer" update="actionForm"
+						actionListener="#{lcmStateBean.editState}" />
+					<p:commandButton value="annuler" update="actionForm"
+						actionListener="#{lcmStateBean.annuler}" />
+
+				</p:panelGrid>
+			</p:panel>
+
+
+		<p:panel id="PanelList">
+			<p:commandButton value="Liste des états"
+				actionListener="#{lcmStateBean.backListState()}" immediate="true"/>
+		</p:panel>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

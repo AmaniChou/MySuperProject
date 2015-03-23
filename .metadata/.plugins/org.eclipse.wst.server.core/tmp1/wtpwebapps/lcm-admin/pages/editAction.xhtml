@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="actionForm2">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Modifier Action" toggleable="true"
+				toggleSpeed="1000" id="panelaction">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nom Action : " />
+					<p:inputText value="#{lcmActionBean.thisAction.actionName}"
+						id="nomAction" required="true"
+						requiredMessage="Vous devez enter le nom de l'action !" />
+					<p:outputLabel value="Description : " />
+					<p:inputText value="#{lcmActionBean.thisAction.description}"
+						id="description" />
+
+					<h:outputLabel value="Type Action: " />
+					<p:selectOneMenu
+						value="#{lcmActionBean.thisAction.actionType.actionType}"
+						effect="fade">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{lcmActionTypeBean.listTypes}"></f:selectItems>
+					</p:selectOneMenu>
+
+					<p:commandButton value="enregistrer" update="actionForm2"
+						actionListener="#{lcmActionBean.editAction}" />
+					<p:commandButton value="annuler" update="actionForm2"
+						actionListener="#{lcmActionBean.annuler}" />
+
+				</p:panelGrid>
+			</p:panel>
+
+
+		</h:form>
+		<h:form>
+			<p:panel id="PanelList">
+				<p:commandButton value="Liste des services"
+					actionListener="#{lcmServicebean.backListeService()}" />
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

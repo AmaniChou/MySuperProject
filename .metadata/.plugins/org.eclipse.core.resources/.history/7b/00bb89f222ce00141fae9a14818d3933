@@ -1,0 +1,7 @@
+package com.tunisiana.lcm.dao;
+
+import com.tunisiana.lcm.entities.LcmEventEntity;
+
+public interface LcmEventDAO {
+public LcmEventEntity getEventByID(String id);
+}

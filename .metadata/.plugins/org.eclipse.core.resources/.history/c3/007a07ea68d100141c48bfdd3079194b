@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13656950587810" configfile="/lcm-admin/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/index.xhtml" id="pf13662002811717" referenceLink="//@navigationRule.0/@fromViewId|" path="/views/service.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/error.xhtml" id="pf136620044156224" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" path="/views/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewss/add.xhtml" id="pf136620044156225" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" path="/views/add.xhtml"/>
+</pageflow:Pageflow>

@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+
+	<title>Simulation</title>
+
+
+	<h:outputStylesheet library="css" name="design.css" />
+
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+		<p:layoutUnit position="north" size="123" resizable="false"
+			closable="false" collapsible="false">
+			<h:form>
+
+				<table>
+					<tr>
+					<!-- 	<td align="left"><h:outputLink
+								value="http://www.ooredoo.com/" title="Ooredoo">
+								<div class="logoOoredooHorizontal" />
+							</h:outputLink></td> -->
+						<td align="center"><h:outputLink>
+								<div class="lCMAdmin" />
+							</h:outputLink></td>
+						<td align="right" class="userInfo"><h:outputLink
+								value="/lcm-admin/pages/home.jsf" title="Acceuil" icon="home"
+								styleClass="icon1">
+								<h:outputLabel value="Acceuil"></h:outputLabel>
+							</h:outputLink> <h:outputLink value="/lcm-admin/pages/login.jsf"
+								title="Deconnexion" icon="ui-icon-power" styleClass="icon2">
+								<h:outputLabel value="Deconnexion"></h:outputLabel>
+							</h:outputLink></td>
+
+					</tr>
+				</table>
+
+			</h:form>
+
+
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="300" header="Menu principal"
+			resizable="false" closable="fasle" collapsible="false">
+
+			<p:panel header="Menu">
+				<h:form>
+
+					<p:growl id="messages" autoUpdate="true" />
+					<p:panelMenu style="width:150px">
+						<p:submenu label="Gestion des Services"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les services"
+								outcome="/pages/listService" />
+							<p:menuitem value="Configurer un nouveau service"
+								outcome="/pages/addParameterService" />
+						</p:submenu>
+						<p:submenu label="Gestion des Etats"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les Etats" ajax="false"
+								outcome="/pages/listState" />
+							<p:menuitem value="Ajouter un Etat" ajax="false"
+								outcome="/pages/addState" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Gestion des Actions"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les Actions" ajax="false"
+								outcome="/pages/listAction" />
+							<p:menuitem value="Ajouter une Action" ajax="false"
+								outcome="/pages/addAction" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Simulation" style="width:150px;font-size:12px ;">
+							<p:menuitem value="Simuler le cycle de vie d'un service"
+								ajax="false" />
+							<p:menuitem value="Valider la configuration dun service"
+								ajax="false" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Migration" style="width:150px;font-size:12px ;">
+							<p:menuitem value="EXPORT" ajax="false" />
+							<p:menuitem value="IMPORT" ajax="false" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Gestion des utilisateurs"
+							style="width:150px;font-size:12px ;">
+							<p:menuitem value="Consulter les utilisateurs" ajax="false"
+								outcome="/pages/listUsersAdmin" />
+							<p:menuitem value="Ajouter un utilisateur" ajax="false"
+								outcome="/pages/addUser" />
+						</p:submenu>
+
+					</p:panelMenu>
+
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="serviceSimulation" position="center">
+			<h:form id="simulateForm">
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+				<p:panel header="Simulate service" toggleable="true"
+					toggleSpeed="1000" id="panelService">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Date Début" />
+						<p:calendar
+							value="#{lcmServiceSimulationBean.date_debut_simulation}"
+							id="date_deb" required="true"
+							requiredMessage="Vous devez saisir la Date de Début Simulation!" />
+						<p:outputLabel value="Date Fin : " />
+						<p:calendar value="#{lcmServiceSimulationBean.date_fin_simulaion}"
+							id="date_fin" required="true"
+							requiredMessage="Vous devez saisir la Date de Fin de Simulation!" />
+						<p:outputLabel value="Date Recharge : " />
+						<p:calendar value="#{lcmServiceSimulationBean. date_recharge}"
+							id="date_recharge" required="true"
+							requiredMessage="Vous devez saisir la Date de Recharge !" />
+						<p:outputLabel value="Solde Client avant la recharge(Dinars) " />
+						<p:inputText value="#{lcmServiceSimulationBean.soldeClient}"
+							id="solde" required="true"
+							requiredMessage="Vous devez saisir un solde positif !" />
+						<p:outputLabel value="Montant de recharge(Dinars) " />
+						<p:inputText value="#{lcmServiceSimulationBean.montantRecharge}"
+							id="montatnt" required="true"
+							requiredMessage="Vous devez saisir un montant de recharge positif !" />
+
+
+
+						<p:commandButton value="Simuler"
+							actionListener="#{lcmServiceSimulationBean.goToSimulationPage}"
+							ajax="true" />
+						<p:commandButton value="annuler" update="simulateForm"
+							actionListener="#{lcmServiceSimulationBean.annuler}" />
+					</p:panelGrid>
+
+				</p:panel>
+			</h:form>
+
+			<p:separator id="seperator" style="width:1000px;height:10px" />
+
+			<h:form>
+				<p:panel>
+					<p:commandButton value="Liste des services"
+						actionListener="#{lcmServiceSimulationBean.backListeService}" />
+				</p:panel>
+			</h:form>
+
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
+

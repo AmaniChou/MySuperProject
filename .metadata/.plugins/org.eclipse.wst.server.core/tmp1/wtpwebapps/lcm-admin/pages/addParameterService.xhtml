@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="serviceForm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout service" toggleable="true" toggleSpeed="1000"
+				id="panelService">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="SNCODE " />
+					<p:inputText value="#{lcmServicebean.sncode}" id="sncode"
+						required="true"
+						requiredMessage="Vous devez saisir un sncode positif !" />
+
+					<p:outputLabel value="Nom Service : " />
+					<p:inputText value="#{lcmServicebean.name}" id="nom"
+						required="true"
+						requiredMessage="Vous devez saisir le nom du service !" />
+
+					<p:outputLabel value="Coût de renouvellement du Service : " />
+					<p:inputText value="#{lcmServicebean.serviceRenewalFee}" id="cost"
+						required="true"
+						requiredMessage="Vous devez saisir le nom du service !" />
+
+					<p:outputLabel value="Birthday Flag: " />
+					<p:selectOneRadio id="flag" value="#{lcmServicebean.birthDayFlag}">
+						<f:selectItem itemLabel="true" itemValue="true" />
+						<f:selectItem itemLabel="false" itemValue="false" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Strategie de la date d'activation: " />
+					<p:selectOneMenu value="#{lcmServicebean.activationDateStrategy}">
+						<f:selectItem itemLabel="DATE_TO_DATE" itemValue="DATE_TO_DATE" />
+						<f:selectItem itemLabel="MONTH_TRUNCATE"
+							itemValue="MONTH_TRUNCATE" />
+						<f:selectItem itemLabel="DAY_TRUNCATE" itemValue="DAY_TRUNCATE" />
+						<f:selectItem itemLabel="HOUR_TRUNCATE" itemValue="HOUR_TRUNCATE" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Preaction: " />
+					<p:selectOneRadio id="preaction"
+						value="#{lcmServicebean.preActionFlag}">
+						<f:selectItem itemLabel="true" itemValue="true" />
+						<f:selectItem itemLabel="false" itemValue="false" />
+					</p:selectOneRadio>
+
+					<p:commandButton value="enregistrer" update="serviceForm"
+						actionListener="#{lcmServicebean.addServiceBaseParameter}"
+						ajax="true" />
+					<p:commandButton value="annuler" update="serviceForm"
+						actionListener="#{lcmServicebean.annuler}" />
+				</p:panelGrid>
+
+			</p:panel>
+	<p:panel id="test" >
+			<p:commandButton value="DEFINIR LA PREACTION DU SERVICE" visible="lcmServicebean.boutonState"
+				actionListener="#{lcmServicebean.gotoPreaction}" immediate="true" />
+		</p:panel>
+		<p:panel id="PanelList">
+			<p:commandButton value="Liste des services"
+				actionListener="#{lcmServicebean.backListeService()}"
+				immediate="true" />
+		</p:panel>
+
+		</h:form>
+
+
+	
+
+
+
+
+	</ui:define>
+
+</ui:composition>

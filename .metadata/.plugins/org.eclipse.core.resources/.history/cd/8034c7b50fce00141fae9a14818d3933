@@ -1,0 +1,25 @@
+package com.tunisiana.lcm.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LCM_LNK_STATE_PARAMETER")
+public class LcmLnkStateParameterEntity implements Serializable {
+
+	@Id//@EmbeddedId
+	LcmLnkStateParameterEntityPK id;
+	
+	@Column(name="VERSION")
+	long version;
+	
+	@Column(name="VALUE")
+	String value;
+	
+	
+	
+}

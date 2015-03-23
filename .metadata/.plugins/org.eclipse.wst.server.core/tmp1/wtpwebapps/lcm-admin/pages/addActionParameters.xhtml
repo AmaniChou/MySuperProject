@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="actionForm2">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panel header="Ajout Paramètres Action" toggleable="true" toggleSpeed="1000"
+				id="panelaction">
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Nom Action : " />
+					<p:inputText value="#{lcmActionBean.action}" id="nomAction"
+						required="true"
+						requiredMessage="Vous devez enter le nom de l'action !" />
+
+					<p:outputLabel value="Description : " />
+					<p:inputText value="#{lcmActionBean.description}" id="description" />
+
+					<p:outputLabel value="Type Action: " />
+					<p:selectOneMenu value="#{lcmActionBean.type_action}" effect="fade">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{lcmActionTypeBean.listTypes}"></f:selectItems>
+					</p:selectOneMenu>
+
+
+					<p:commandButton value="enregistrer" update="actionForm2"
+						actionListener="#{lcmActionBean.addAction}" />
+					<p:commandButton value="annuler" update="actionForm2"
+						actionListener="#{lcmActionBean.annuler()}" />
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+		<p:panel>
+		<p:commandButton value="Ajouter paramètres action"
+						actionListener="#{lcmActionBean.addActionParameter()}" />
+		</p:panel>
+			<p:panel id="PanelList">
+				<p:commandButton value="Liste des actions"
+					actionListener="#{lcmActionBean.backListeAction()}" />
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

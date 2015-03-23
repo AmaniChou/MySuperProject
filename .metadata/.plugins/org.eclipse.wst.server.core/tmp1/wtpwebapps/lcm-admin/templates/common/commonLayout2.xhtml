@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<f:view contentType="text/html" locale="#{userData.locale}">
+	<h:head>
+		<title><ui:insert name="title">
+				<h:outputText value="LCM" />
+			</ui:insert></title>
+
+		<h:outputStylesheet library="css" name="default.css" />
+
+	</h:head>
+	<h:body>
+		<p:layout fullPage="true">
+
+			<p:layoutUnit position="north" size="200" resizable="false"
+				closable="false" collapsible="true">
+				<div id="header" style="width: 100%;">
+					<ui:insert name="header">
+						<ui:include src="/templates/common/commonHeader.xhtml"></ui:include>
+					</ui:insert>
+				</div>
+			</p:layoutUnit>
+
+
+			<p:layoutUnit position="west" size="600" width="300" header="Menu" >
+
+			<div id="content">
+				<ui:insert name="content">
+					<ui:include src="/templates/common/commonContent.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<div id="center">
+					<h3>HELLO</h3>
+				</div>
+			</p:layoutUnit>
+
+
+			<p:layoutUnit position="south" size="100">
+				<div id="footer">
+					<ui:insert name="footer">
+						<ui:include src="/templates/common/commonFooter.xhtml"></ui:include>
+					</ui:insert>
+				</div>
+			</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</f:view>
+</html>

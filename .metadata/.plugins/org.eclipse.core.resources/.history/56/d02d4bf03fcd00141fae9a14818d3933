@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html" >
+	<h:head>
+		<title>
+		<ui:insert name="title">
+				<h:outputText value="LCM" />
+		</ui:insert>
+		</title>
+<!-- 		<h:outputStylesheet library="css" name="design.css" target="body" /> -->
+	</h:head>
+	<h:body>
+		<div id="container" class="border">
+			<table cellpadding="0" cellspacing="0" border="0" id="containerTab">
+				<tr>
+					<td>
+						<div id="header" style="width: 100%;">
+							<ui:insert name="header">
+								<ui:include src="/template/CommonHeader.xhtml"></ui:include>
+							</ui:insert>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style="width:100%;">
+							<tr>
+								<td valign="top" style="width:3%;">
+									<div id="content">
+										<ui:insert name="content">
+											<ui:include src="/template/CommonSideContent.xhtml"></ui:include>
+										</ui:insert>
+									</div>
+								</td>
+								<td valign="top" style="width:97%;">
+									<div id="content2" >
+										<ui:insert name="content2">
+											<ui:include src="/template/CommonCenterContent.xhtml"></ui:include>
+										</ui:insert>
+									</div>
+								</td>
+							</tr>
+						</table>
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="footer">
+							<ui:insert name="footer">
+								<ui:include src="/template/CommonFooter.xhtml"></ui:include>
+							</ui:insert>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</h:body>
+</f:view>
+</html>

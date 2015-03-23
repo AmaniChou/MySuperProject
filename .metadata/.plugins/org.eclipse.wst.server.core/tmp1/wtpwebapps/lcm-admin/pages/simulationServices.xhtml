@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+			<p:panel id="searchPanel" header="RECHERCHE">
+				<p:panelGrid columns="4" style="width:100%">
+
+
+					<p:outputLabel for="name" value="Nom du service : " />
+					<p:inputText id="name" value="#{lcmServiceSimulationBean.name}">
+						<p:ajax event="keyup"
+							listener="#{lcmServiceSimulationBean.updateList}" />
+					</p:inputText>
+					<p:outputLabel for="sncode" value="SNCODE : " />
+					<p:inputText id="sncode" value="#{lcmServiceSimulationBean.sncode}">
+						<p:ajax event="keyup"
+							listener="#{lcmServiceSimulationBean.updateList}" />
+					</p:inputText>
+
+				</p:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton id="seekService" value="Rechercher"
+						update="panelResult"
+						actionListener="#{lcmServiceSimulationBean.searchService}"
+						ajax="true" icon="ui-icon-search" />
+					<p:commandButton id="reset" value="Annuler"
+						update="searchPanel,panelResult"
+						actionListener="#{lcmServiceSimulationBean.resetSearch}"
+						ajax="true" icon="ui-icon-closethick" />
+				</f:facet>
+			</p:panel>
+			<p:panel header="Liste des Services" toggleable="true" rows="3"
+				toggleSpeed="1000"
+				visible="#{lcmServiceSimulationBean.boutonService}" id="panelResult">
+				<p:dataTable var="serviceTAB"
+					value="#{lcmServiceSimulationBean.listServices}" paginator="true"
+					widgetVar="serviceTable" id="servicesTable"
+					rowKey="#{LifeCycleServieEntity.sncode}"
+					filteredValue="#{lcmServicebean.filtredService}"
+					rowsPerPageTemplate="5,10,15">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<p:outputLabel value="recherche :  " />
+							<p:inputText id="globalFilter" onkeyup="serviceTable.filter()"
+								style="width:150px" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="SNCODE" filterBy="#{serviceTAB.sncode}"
+						filterMatchMode="contains">
+						<p:outputLabel value="#{serviceTAB.sncode}" />
+					</p:column>
+
+					<p:column headerText="Nom Service" filterBy="#{serviceTAB.name}"
+						filterMatchMode="contains">
+						<p:outputLabel value="#{serviceTAB.name}" />
+					</p:column>
+
+					<p:column headerText="Preaction"
+						filterBy="#{lcmServicebean.actionPreaction(serviceTAB.preAction)}">
+						<h:outputText
+							value="#{lcmServicebean.actionPreaction(serviceTAB.preAction)}" />
+					</p:column>
+
+					<p:column headerText="Simuler">
+						<center>
+							<p:commandButton icon=" ui-icon-refresh"
+								actionListener="#{lcmServiceSimulationBean.goToSimulationParameter(serviceTAB)}"
+								ajax="true" />
+						</center>
+					</p:column>
+
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

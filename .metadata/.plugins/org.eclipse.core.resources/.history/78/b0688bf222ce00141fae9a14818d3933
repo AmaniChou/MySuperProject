@@ -1,0 +1,8 @@
+package com.tunisiana.lcm.dao;
+
+import com.tunisiana.lcm.entities.LcmContextHistoryEntity;
+
+public interface LcmContextHistoryDAO {
+
+	LcmContextHistoryEntity getLcmContextHistory();
+}

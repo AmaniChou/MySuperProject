@@ -1,0 +1,28 @@
+package com.tunisiana.lcm.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "LCM_LNK_STATE_PARAMETER")
+public class LcmLnkStateParameterEntity {
+
+	
+	@Column(name="ID_STATE_PARAMETER")
+	String id_state_parameter;
+	
+	@Column(name="ID_STATE")
+	String id_state ;
+	
+	@Column(name="SNCODE")
+	long sncode;
+	
+	@Column(name="VERSION")
+	long version;
+	
+	@Column(name="VALUE")
+	String value;
+	
+}

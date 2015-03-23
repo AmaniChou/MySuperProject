@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+		<h:form id="userForm">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+			<p:panel id="searchPanel" header="RECHERCHE">
+				<p:panelGrid columns="4" style="width:100%">
+					<p:outputLabel for="name" value="Nom  : " />
+					<p:inputText id="name" value="#{lcmUsersBean.firstname}">
+					</p:inputText>
+					<p:outputLabel for="prenom" value="Prenom : " />
+					<p:inputText id="prenom" value="#{lcmUsersBean.lastname}">
+					</p:inputText>
+				</p:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton id="seekUser" value="Rechercher"
+						update="panelResult" actionListener="#{lcmUsersBean.searchUser}"
+						ajax="true" icon="ui-icon-search" />
+					<p:commandButton id="reset" value="Annuler"
+						update="searchPanel,panelResult"
+						actionListener="#{lcmUsersBean.resetSearch}" ajax="true"
+						icon="ui-icon-closethick" />
+				</f:facet>
+			</p:panel>
+
+			<p:panel header="Liste des Utilisateurs" toggleable="true" 
+				toggleSpeed="1000" visible="#{lcmUsersBean.boutonUser}"
+				id="panelResult">
+				<p:dataTable var="userTAB" value="#{lcmUsersBean.listUsers}"
+					paginator="true" widgetVar="userTable" id="usersTable"
+					rowKey="#{lcmUsersAdminEntity.user_id}"
+					filteredValue="#{lcmUsersBean.filtredUser}"
+					rowsPerPageTemplate="5,10,15">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<p:outputLabel value="recherche :  " />
+							<p:inputText id="globalFilter" onkeyup="userTable.filter()"
+								style="width:150px" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="NOM UTILISATEUR">
+						<p:outputLabel value="#{userTAB.username}" />
+					</p:column>
+
+					<p:column headerText="NOM" filterBy="#{userTAB.firstname}"
+						filterMatchMode="contains">
+						<p:outputLabel value="#{userTAB.firstname}" />
+					</p:column>
+
+					<p:column headerText="PRENOM" filterBy="#{userTAB.lastname}"
+						filterMatchMode="contains">
+						<p:outputLabel value="#{userTAB.lastname}" />
+					</p:column>
+
+					<p:column headerText="DATE EXPIRATION">
+						<p:outputLabel value="#{userTAB.expiration_date}" />
+					</p:column>
+
+					<p:column headerText="ACTIVE">
+						<p:outputLabel value="#{userTAB.enabled}" />
+					</p:column>
+
+					<p:column headerText="PROFIL">
+						<p:outputLabel value="#{userTAB.lcmProfil.profil}" />
+					</p:column>
+
+					<p:column headerText="Editer">
+						<center>
+							<p:commandButton icon="ui-icon-pencil"
+								actionListener="#{lcmUsersBean.goToEditUser(userTAB)}" />
+						</center>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

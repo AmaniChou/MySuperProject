@@ -1,0 +1,21 @@
+package com.tunisiana.lcm.DAOImp;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.tunisiana.lcm.dao.LcmEventDAO;
+import com.tunisiana.lcm.entities.LcmEventEntity;
+
+public class LcmEventDAOImp implements LcmEventDAO{
+	@PersistenceContext(unitName="lcmPersistenceUnit")
+	EntityManager em;
+
+	@Override
+	public LcmEventEntity getEventByID(String id) {
+		
+		return em.find(LcmEventEntity.class,id);
+	}
+
+
+
+}

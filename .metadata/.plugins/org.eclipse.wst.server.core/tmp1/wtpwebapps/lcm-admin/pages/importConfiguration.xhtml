@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/pageTemplate.xhtml">
+
+	<ui:define name="content2">
+
+
+		<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+			<p:fileUpload fileUploadListener="#{lcmServicebean.upload}"
+				allowTypes="/(\.|\/)(gif|jpe?g|png|sql|xml)$/" sizeLimit="100000"
+				description="Select Images" />
+				
+				
+							<p:commandButton value="Generate SQL"
+								action="#{lcmServicebean.generateSqlFromXML()}"
+								ajax="false" icon="ui-icon-arrowthick-1-s">
+							</p:commandButton>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
